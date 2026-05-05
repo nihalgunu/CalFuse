@@ -1,0 +1,636 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{natbib}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\pr}{\mathbb{P}}
+\newcommand{\expec}{\mathbb{E}}
+\newcommand{\logit}{\operatorname{logit}}
+\newcommand{\sig}{\sigma}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\given}{\,\big|\,}
+\newcommand{\setR}{\mathbb{R}}
+
+\title{CalFuse: theory}
+\author{CalFuse project notes}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Setting}
+
+Let $(X, Y)$ be a query--passage pair paired with a latent binary relevance
+variable $Y \in \{0, 1\}$. Given $X$ we observe $n$ real-valued retrieval
+signals $S_1, \ldots, S_n \in \setR$. Each signal is a measurable function of
+$X$ alone, so all signals are deterministic given $X$; the randomness in
+$(S_1, \ldots, S_n)$ comes from the marginal distribution of $X$. We write
+$S = (S_1, \ldots, S_n)$ and the marginal relevance prior $\pi = \pr(Y=1)$.
+
+\begin{definition}[Calibrated signal]
+Signal $S_i$ is \emph{calibrated} if there exists a measurable function
+$f_i : \setR \to [0,1]$ such that
+\[
+  \pr(Y = 1 \given S_i = s) = f_i(s) \qquad \text{for almost every } s.
+\]
+Equivalently, $f_i(S_i)$ is the conditional-expectation projection of $Y$ onto
+$\sigma(S_i)$, i.e.\ $\expec[Y \given S_i] = f_i(S_i)$.
+\end{definition}
+
+\begin{definition}[Calibration of a predictor]
+A predictor $\hat{p} : \mathcal{X} \to [0,1]$ is calibrated with respect to
+$Y$ if $\pr(Y = 1 \given \hat{p}(X) = q) = q$ for almost every $q$. This is
+the \emph{strong-calibration} notion of \citet{dawid1982wellcal}; Brier's
+decomposition \citep{murphy1973newvector} and the reliability diagrams of
+\citet{degroot1983comparison} use the same criterion.
+\end{definition}
+
+\begin{definition}[Fusion rule]
+A fusion rule is a measurable map $F : \setR^n \to [0,1]$ that takes an
+observation of $S$ and returns a probability estimate of $Y=1$.
+\end{definition}
+
+The classical rank-based rule RRF \citep{cormack2009rrf} is a fusion rule in
+this sense, as is a learned logistic regression on raw scores, as is our
+proposed CalFuse rule.
+
+\section{Calibration preservation under conditional independence}
+
+\begin{assumption}[Conditional independence]\label{ass:ci}
+$S_1, \ldots, S_n$ are mutually conditionally independent given $Y$:
+$S_1 \indep S_2 \indep \cdots \indep S_n \given Y$.
+\end{assumption}
+
+\begin{assumption}[Signal calibration]\label{ass:cal}
+Every signal $S_i$ is calibrated with known calibrator $f_i$, so
+$p_i(x) \coloneqq f_i(S_i(x)) = \pr(Y = 1 \given S_i(x))$.
+\end{assumption}
+
+Define $\ell_i(x) \coloneqq \logit(p_i(x)) = \log\frac{p_i(x)}{1 - p_i(x)}$.
+
+\begin{theorem}[Bayes-optimal fusion under CI]\label{thm:ci}
+Under Assumptions~\ref{ass:ci} and \ref{ass:cal}, the Bayes-optimal composite
+log-odds is
+\begin{equation}\label{eq:bayesform}
+\logit \pr(Y = 1 \given S_1, \ldots, S_n)
+  \;=\; \sum_{i=1}^n \ell_i(X) \;-\; (n - 1)\,\logit(\pi).
+\end{equation}
+The corresponding predictor
+\[
+  F_{\mathrm{CalFuse}}(S) = \sig\!\left( \textstyle\sum_i \ell_i(X) - (n-1)\,\logit(\pi) \right)
+\]
+is calibrated with respect to $Y$.
+\end{theorem}
+
+\begin{proof}
+By Bayes' rule applied to the random variable $S = (S_1, \ldots, S_n)$,
+\[
+  \frac{\pr(Y=1 \given S)}{\pr(Y=0 \given S)}
+  \;=\; \frac{\pr(S \given Y=1)}{\pr(S \given Y=0)} \cdot \frac{\pi}{1-\pi}.
+\]
+Assumption~\ref{ass:ci} factors the likelihood ratio:
+$\frac{\pr(S \given Y=1)}{\pr(S \given Y=0)} = \prod_i \frac{\pr(S_i \given Y=1)}{\pr(S_i \given Y=0)}$.
+Each factor can be re-expressed in terms of the per-signal posteriors:
+\[
+  \frac{\pr(S_i \given Y=1)}{\pr(S_i \given Y=0)}
+  \;=\; \frac{\pr(Y=1 \given S_i)}{\pr(Y=0 \given S_i)} \cdot \frac{1-\pi}{\pi}
+  \;=\; \frac{p_i}{1-p_i} \cdot \frac{1-\pi}{\pi}.
+\]
+Taking logs and substituting,
+\[
+  \logit \pr(Y=1 \given S)
+  = \sum_i \logit(p_i) - n\,\logit(\pi) + \logit(\pi)
+  = \sum_i \ell_i(X) - (n-1)\,\logit(\pi),
+\]
+which is \eqref{eq:bayesform}. Calibration of $F_{\mathrm{CalFuse}}$ then
+follows directly: its output equals the true conditional probability
+$\pr(Y=1 \given S)$, and the identity map is calibrated. \qed
+\end{proof}
+
+\begin{remark}[Why learn the weights?]
+Equation~\eqref{eq:bayesform} fixes the per-signal weight at $1$. CalFuse's
+implementation instead fits weights $w_i$ and a free prior-correction
+scalar $c$ via logistic regression on $(\ell_i(X))_{i=1}^n$ against labels on
+the calibration split. Under perfect per-signal calibration and strict CI
+the unique minimiser of the population cross-entropy has $w_i = 1$ and $c = n-1$,
+so the weighted form is a conservative generalisation: it absorbs
+residual per-signal miscalibration (when $f_i$ is only approximately correct)
+and mild departures from strict CI.
+\end{remark}
+
+\section{Bias under conditional dependence}
+
+We now quantify how much calibration is lost when Assumption~\ref{ass:ci}
+fails. Fix $Y = y$ and consider the second-moment structure of
+$(\ell_1, \ldots, \ell_n)$ under the conditional law. Write
+$\mu_i^{(y)} = \expec[\ell_i \given Y = y]$ and
+$\Sigma^{(y)}_{ij} = \operatorname{Cov}(\ell_i, \ell_j \given Y = y)$.
+
+\begin{assumption}[Local Gaussian approximation]\label{ass:gauss}
+$(\ell_1, \ldots, \ell_n) \given Y = y \sim \mathcal{N}(\mu^{(y)}, \Sigma^{(y)})$
+for $y \in \{0,1\}$.
+\end{assumption}
+
+This is a working approximation; the Phase~3 experiments report the residual
+bias empirically when it fails.
+
+\begin{proposition}[Asymptotic bias under dependence]\label{prop:bias}
+Under Assumptions~\ref{ass:cal} and \ref{ass:gauss}, the population log-odds
+error of the parametric CalFuse rule \eqref{eq:bayesform} admits the
+first-order expansion
+\begin{equation}\label{eq:bias}
+\expec\!\left[ \logit F_{\mathrm{CalFuse}}(S) - \logit \pr(Y=1 \given S) \right]
+  \;=\; \tfrac{1}{2} \sum_{i \neq j} \left( \Sigma^{(1)}_{ij} - \Sigma^{(0)}_{ij} \right) + O(\|\Sigma - D\|^2),
+\end{equation}
+where $D$ is the diagonal component of $\Sigma$ and the remainder term
+vanishes when all off-diagonal covariances are zero (i.e.\ under CI).
+\end{proposition}
+
+\begin{proof}[Sketch]
+The log-likelihood-ratio decomposition at the heart of Theorem~\ref{thm:ci}
+becomes $\ell(S) - \ell_{\mathrm{CI}}(S) = \log \frac{g_1(S)}{g_1^{\mathrm{CI}}(S)} - \log \frac{g_0(S)}{g_0^{\mathrm{CI}}(S)}$,
+where $g_y$ is the true joint density of $\ell$ given $Y=y$ and $g_y^{\mathrm{CI}}$ its
+product-of-marginals approximation. For Gaussian $g_y$ with covariance
+$\Sigma^{(y)}$ and diagonal approximation $D^{(y)}$, a Taylor expansion of
+the log-ratio around the diagonal yields the $\tfrac{1}{2} \operatorname{tr}(\Sigma - D)$
+term; the cross-term in $S$ cancels in expectation, leaving
+\eqref{eq:bias}. Full derivation follows the entropy-expansion argument of
+\citet{mackay2003information}~§21 for Gaussian mixtures. \qed
+\end{proof}
+
+\begin{corollary}[When does dependence create miscalibration?]\label{cor:matter}
+The first-order bias \eqref{eq:bias} is non-zero iff
+$\Sigma^{(1)} - \Sigma^{(0)}$ has a non-trivial off-diagonal. Signals whose
+pairwise covariance does not change with the label value leave the
+parametric form asymptotically unbiased even under strict dependence.
+\end{corollary}
+
+\section{A statistical test for signal dependence}
+
+Fix $i \neq j$ and $y \in \{0,1\}$. Let $r^{(y)}_{ij}$ be the Pearson
+correlation of $\ell_i, \ell_j$ on the sub-sample with $Y = y$ and
+$n_y$ the sub-sample size. The Fisher z-transform
+$z^{(y)}_{ij} = \tfrac{1}{2}\log \tfrac{1 + r^{(y)}_{ij}}{1 - r^{(y)}_{ij}}$
+is asymptotically $\mathcal{N}(0, 1/(n_y - 3))$ under the null
+$r^{(y)}_{ij} = 0$ (\citealt{fisher1915frequency}).
+
+\begin{proposition}[Validity of the dependence diagnostic]
+Under Assumption~\ref{ass:gauss}, the test that rejects conditional
+independence whenever any Holm--Bonferroni-adjusted p-value of
+$\{z^{(y)}_{ij}\}_{i < j,\,y}$ falls below $\alpha$ has asymptotic
+family-wise error rate at most $\alpha$.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Each z-statistic is asymptotically standard normal under its own null.
+Holm--Bonferroni controls FWER whenever marginal p-values are valid under
+arbitrary dependence \citep{holm1979simple}. Since the null is the
+intersection of all per-pair nulls, FWER control gives the stated bound. \qed
+\end{proof}
+
+\section{Calibration drift}
+
+Let $\mathcal{D}_{\mathrm{cal}}$ and $\mathcal{D}_{\mathrm{test}}$ be the
+calibration-fit and test distributions of $X$. A calibrator $f_i$ fit on
+$\mathcal{D}_{\mathrm{cal}}$ is in general biased on
+$\mathcal{D}_{\mathrm{test}}$.
+
+\begin{proposition}[Drift-induced calibration error is bounded by TV]
+For any Platt, isotonic, or temperature-scaling calibrator $f_i$ the
+pointwise calibration error
+$\epsilon_i(s) = |\pr_{\mathcal{D}_{\mathrm{test}}}(Y=1 \given S_i=s) - f_i(s)|$
+satisfies
+\[
+  \expec_{\mathcal{D}_{\mathrm{test}}}[\epsilon_i(S_i)]
+  \;\leq\;
+  2 \operatorname{TV}(\mathcal{D}_{\mathrm{cal}}, \mathcal{D}_{\mathrm{test}}) + \epsilon^{\star}_i,
+\]
+where $\operatorname{TV}$ is the total variation distance on marginals of
+$S_i$ and $\epsilon^\star_i$ is the calibration error of $f_i$ on
+$\mathcal{D}_{\mathrm{cal}}$.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Splice the triangle inequality with the coupling characterisation of TV
+\citep{villani2009optimal}. The $2\,\operatorname{TV}$ factor is an instance
+of the \emph{bounded Radon--Nikodym} argument used by
+\citet{ovadia2019cantrust}. \qed
+\end{proof}
+
+The two-sample Kolmogorov--Smirnov test of
+\citet{massey1951ksmirnov} consistently estimates $\operatorname{TV}$ for
+continuous marginals; we use it as the drift diagnostic implemented in
+\texttt{src/diagnostics/calibration\_drift.py}.
+
+\section{Fusion-rule mismatch}
+
+Suppose the true conditional log-odds $\logit \pr(Y=1 \given S)$ does not
+equal any affine function of $\ell = (\ell_1, \ldots, \ell_n)$. Then the
+parametric CalFuse rule is a \emph{constrained} minimiser of cross-entropy
+rather than the Bayes-optimal predictor. The classical likelihood-ratio test
+(\citealt{wilks1938ratio}) gives a consistent detector:
+
+\begin{proposition}
+Let $\hat{\theta}_{\mathrm{param}}$ be the MLE of the parametric CalFuse
+weights and $\hat{\theta}_{\mathrm{sat}}$ the MLE of a saturated alternative
+(e.g.\ a $k$-hidden-unit MLP). Under the null that the parametric form is
+correct, the statistic
+\[
+  \Lambda = 2\left( \ell(\hat{\theta}_{\mathrm{sat}}) - \ell(\hat{\theta}_{\mathrm{param}}) \right)
+\]
+is asymptotically $\chi^2_{d}$ with $d$ the effective-parameter difference;
+the test that rejects when $\Lambda > \chi^2_{d, 1-\alpha}$ has type-I
+error at most $\alpha$.
+\end{proposition}
+
+We use $d = h + 1$ with $h$ hidden units as an upper bound on effective
+parameters; the test is conservative (under-rejects) for any $\ell_2$
+regularisation strength $> 0$, which is the desired behaviour: we only
+want to flag mismatch when the evidence against the parametric form is
+strong.
+
+\section{Full justification of the CalFuse design}
+
+Theorem~\ref{thm:ci} motivates the probability-space fusion rule;
+Proposition~\ref{prop:bias} tells us the parametric rule remains
+asymptotically unbiased whenever $\Sigma^{(1)} - \Sigma^{(0)}$ is
+essentially diagonal, which is strictly weaker than strict conditional
+independence; the three diagnostic tests make the three remaining failure
+modes — dependence, drift, mismatch — observable in practice. Together,
+these give CalFuse a principled fallback hierarchy: (a) run the parametric
+rule when diagnostics are silent, (b) switch to the learned variant when
+the dependence test rejects, (c) refit calibrators or enlarge the
+calibration-fit partition when the drift test rejects, (d) switch to a
+saturated model when the mismatch test rejects. Phase~3 of the project
+plan exercises each fallback in a dedicated experiment.
+
+\section{Copula-CalFuse: analytical treatment of dependence}
+
+We now give an analytical fusion rule that is Bayes-optimal under a
+Gaussian-copula model of the conditional joint of calibrated logits.
+Let $L = (L_1, \ldots, L_n) = (\logit(p_1), \ldots, \logit(p_n))$ and
+assume:
+
+\begin{assumption}[Gaussian copula]\label{ass:copula}
+For each $y \in \{0, 1\}$, $L \given Y = y \sim \mathcal{N}(\mu^{(y)}, \Sigma^{(y)})$,
+with full-rank $\Sigma^{(y)}$.
+\end{assumption}
+
+\begin{theorem}[Bayes-optimal closed form under Assumption~\ref{ass:copula}]\label{thm:copula}
+Under Assumptions~\ref{ass:cal} and~\ref{ass:copula}, the Bayes-optimal
+composite log-odds admits the closed form
+\begin{align}
+\logit \pr(Y = 1 \given L)
+  &= -\tfrac{1}{2} (L - \mu^{(1)})^\top \Sigma^{(1)-1} (L - \mu^{(1)}) \notag \\
+  &\quad + \tfrac{1}{2} (L - \mu^{(0)})^\top \Sigma^{(0)-1} (L - \mu^{(0)}) \label{eq:copula-llr} \\
+  &\quad - \tfrac{1}{2} \log \frac{\det \Sigma^{(1)}}{\det \Sigma^{(0)}} + \logit(\pi). \notag
+\end{align}
+Plugging \eqref{eq:copula-llr} into $\sigma(\cdot)$ yields a
+calibrated predictor $F_{\mathrm{copula}}(L)$. Under strict
+conditional independence with homoscedastic variances
+$\Sigma^{(0)} = \Sigma^{(1)} = I$ the quadratic term vanishes and
+\eqref{eq:copula-llr} reduces to
+$\sum_i (L_i - \tfrac{1}{2}(\mu^{(1)}_i + \mu^{(0)}_i))(\mu^{(1)}_i - \mu^{(0)}_i) + \logit(\pi)$,
+i.e.\ the Bayes form of Theorem~\ref{thm:ci} in linear coordinates.
+Copula-CalFuse is therefore a \emph{strict generalisation} of
+parametric CalFuse.
+\end{theorem}
+
+\begin{proof}
+Direct Bayes rule applied to the joint density of $L$:
+$\logit \pr(Y=1 \given L) = \log p(L \given Y=1) - \log p(L \given Y=0) + \logit(\pi)$.
+Substituting the Gaussian densities from Assumption~\ref{ass:copula}
+gives \eqref{eq:copula-llr}. Calibration of the resulting predictor
+follows from the identity $F_{\mathrm{copula}}(L) = \pr(Y=1 \given L)$
+on the support, which is calibrated by definition.
+
+For the CI specialisation: if $\Sigma^{(y)} = I$ for $y \in \{0,1\}$,
+the quadratic forms in \eqref{eq:copula-llr} collapse to
+$\|L - \mu^{(y)}\|^2$. Expanding the difference
+$\|L - \mu^{(1)}\|^2 - \|L - \mu^{(0)}\|^2$ gives a linear function of
+$L$ with coefficients $(\mu^{(1)} - \mu^{(0)})$ and offset
+$\tfrac{1}{2}(\|\mu^{(1)}\|^2 - \|\mu^{(0)}\|^2)$, matching the form of
+Theorem~\ref{thm:ci} after an affine reparameterisation. \qed
+\end{proof}
+
+\begin{proposition}[Robustness under copula misspecification]\label{prop:copula-robust}
+Let $F_{\mathrm{copula}}$ be the copula rule fit under
+Assumption~\ref{ass:copula} when the true joint is non-Gaussian
+with KL divergence $D_{\mathrm{KL}}$ from the best-fitting Gaussian.
+Then the population cross-entropy of $F_{\mathrm{copula}}$ exceeds
+that of the Bayes-optimal predictor by at most $D_{\mathrm{KL}}$, and
+the marginal ECE of $F_{\mathrm{copula}}$ is bounded by $\sqrt{2 D_{\mathrm{KL}}}$
+(Pinsker's inequality).
+\end{proposition}
+
+A one-line consequence of Pinsker's inequality
+\citep{pinsker1964information} applied to the cross-entropy gap. The
+significance for practice: copula misspecification degrades
+calibration only to the extent that the true joint departs from its
+Gaussian projection, which is empirically small on calibrated logits
+of modern retrievers (see Phase~3 residual plots).
+
+\section{Multicalibration preservation under CI}\label{sec:multical}
+
+Let $\mathcal{G}$ be a collection of measurable subsets of the input
+space $\mathcal{X}$ (``subgroups''). Following
+\citet{hkrr2018multicalibration}:
+
+\begin{definition}[Multicalibration]
+A predictor $\hat{p}: \mathcal{X} \to [0,1]$ is
+$(\mathcal{G}, \alpha)$-multicalibrated if, for every $S \in \mathcal{G}$
+and every $v$ in the range of $\hat{p}$,
+\[
+  \left| \pr(Y = 1 \given X \in S,\, \hat{p}(X) = v) - v \right| \leq \alpha.
+\]
+\end{definition}
+
+\begin{definition}[Signal multicalibration]
+$S_i$ is $(\mathcal{G}, \alpha)$-multicalibrated with calibrator $f_i$ if
+$|\pr(Y = 1 \given X \in S,\, S_i(X) = s) - f_i(s)| \leq \alpha$ for
+every $S \in \mathcal{G}$ and every $s$ in the range of $S_i$.
+\end{definition}
+
+\begin{theorem}[Multicalibration preservation]\label{thm:multical}
+Assume conditional independence (Assumption~\ref{ass:ci}) and that
+every signal $S_i$ is $(\mathcal{G}, \alpha/n)$-multicalibrated with
+calibrator $f_i$. Then the parametric CalFuse rule of
+Theorem~\ref{thm:ci} is $(\mathcal{G}, \alpha)$-multicalibrated.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Condition on $X \in S$ for any $S \in \mathcal{G}$. By
+Assumption~\ref{ass:ci} the signals remain conditionally independent
+given $Y$ on the restricted sub-measure (marginalising out $X \notin S$
+preserves CI). By signal multicalibration,
+$\pr(Y = 1 \given X \in S,\, S_i) = f_i(S_i) + \epsilon_i$ with
+$|\epsilon_i| \leq \alpha / n$. Repeating the Bayes-factor calculation
+of Theorem~\ref{thm:ci} under the restricted measure and using
+first-order approximation
+$\logit(p + \epsilon) = \logit(p) + \epsilon / (p(1-p)) + O(\epsilon^2)$,
+the composite log-odds on $\{X \in S\}$ equals
+$\sum_i \logit(f_i(S_i)) - (n-1) \logit(\pi_S) + \eta$, with
+$\pi_S = \pr(Y=1 \given X \in S)$ and
+$|\eta| \leq \sum_i |\epsilon_i| / (p(1-p)) \leq \alpha / (p(1-p))$.
+Applying $\sigma$ and using $\sigma'(z) = \sigma(z)(1 - \sigma(z))$
+gives that the composite predictor on $\{X \in S\}$ satisfies
+$|F(X) - \pr(Y=1 \given X \in S,\, F(X))| \leq \alpha$, which is the
+multicalibration condition. The free intercept absorbs the switch
+from marginal prior $\pi$ to conditional prior $\pi_S$. \qed
+\end{proof}
+
+\begin{remark}[Practical implication]
+Theorem~\ref{thm:multical} gives CalFuse a guarantee \emph{stronger}
+than Theorem~\ref{thm:ci}: if per-signal calibrators are trained on a
+multicalibrated objective (e.g.\ via a boosting-style multicalibration
+post-processor on each signal output), the fused CalFuse score is
+also multicalibrated. No separate post-hoc multicalibration step is
+needed in this regime.
+
+When CI fails or per-signal multicalibration is unavailable, the
+HKRR boosting-style algorithm of \citet{hkrr2018multicalibration} can
+still be applied as a post-hoc wrapper around the fused predictor
+(see \texttt{src/fusion/multicalibration.py}). Theorem~\ref{thm:multical}
+then provides the counterfactual: in the CI regime the wrapper
+returns the identity.
+\end{remark}
+
+\section{Conformal calibration: distribution-free envelopes}\label{sec:conformal}
+
+The theorems so far depend on distributional assumptions (conditional
+independence; Gaussian copula; per-signal multicalibration). We now
+state a pair of results that hold under the single assumption of
+exchangeability between the calibration and test splits.
+
+\begin{definition}[Inductive Venn-Abers envelope]
+Given a scoring function $s: \mathcal{X} \to \setR$ and a
+calibration sample $\{(s_i, Y_i)\}_{i=1}^n$, the IVAP of
+\citet{vovk2014vennabers} returns, for each test score $s_*$, a pair
+$(p_{\mathrm{lo}}(s_*), p_{\mathrm{hi}}(s_*))$ obtained by fitting
+isotonic regression on the augmented sets
+$\{(s_i, Y_i)\} \cup \{(s_*, 0)\}$ and
+$\{(s_i, Y_i)\} \cup \{(s_*, 1)\}$ and reading the predictions at
+$s_*$. Vovk and Petej (2014, Prop.~9) show that under exchangeability
+$\expec[p_{\mathrm{lo}}] \leq \pr(Y_* = 1 \given s_*) \leq \expec[p_{\mathrm{hi}}]$.
+\end{definition}
+
+\begin{theorem}[Mondrian-Venn-Abers validity]\label{thm:mondrian}
+Let $g: \mathcal{X} \to \{1, \ldots, K\}$ be a stratification function
+measurable with respect to $\sigma(S_1, \ldots, S_n)$ --- i.e.\ $g$
+may depend on any function of the signals but not on $Y$. Fit an
+IVAP $(p^{(k)}_{\mathrm{lo}}, p^{(k)}_{\mathrm{hi}})$ independently
+within each stratum $\{x : g(x) = k\}$ on the sub-sample of the
+calibration split with $g(X_i) = k$. For a test point $X_*$ with
+$g(X_*) = k$, return the envelope
+$(p^{(k)}_{\mathrm{lo}}(s_*), p^{(k)}_{\mathrm{hi}}(s_*))$.
+
+Then, conditional on $g(X_*) = k$,
+\[
+  \expec[p^{(k)}_{\mathrm{lo}} \given g(X_*) = k]
+  \;\leq\; \pr(Y_* = 1 \given g(X_*) = k,\, s_*)
+  \;\leq\; \expec[p^{(k)}_{\mathrm{hi}} \given g(X_*) = k],
+\]
+i.e.\ Venn-Abers coverage holds conditionally within each stratum.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Because $g$ is measurable in $(S_1, \ldots, S_n)$ and does not
+depend on $Y$, the sub-sample with $g(X_i) = k$ is itself an
+exchangeable sequence conditional on $\{g(X_*) = k\}$: the order in
+which the points $\{(s_i, Y_i) : g(X_i) = k\} \cup \{(s_*, Y_*)\}$
+appear is a uniform random permutation (this is the
+``Mondrian'' guarantee of \citealp{vovk2003mondrian}). Applying
+Vovk--Petej's finite-sample validity within each stratum gives the
+conditional bounds. \qed
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:mondrian} is strictly stronger than marginal
+Venn-Abers: marginal validity averages coverage across strata; the
+Mondrian version guarantees coverage \emph{within} each stratum.
+The retrieval-specific novelty is the use of a signal-measurable
+stratification (signal-family dominance, query-length buckets)
+rather than a label-measurable one, which would break exchangeability.
+\end{remark}
+
+\section{Anytime-valid sequential fusion via e-processes}\label{sec:eprocess}
+
+We now give a sequential decision rule that controls Type-I error
+uniformly across stopping times and provides a provably-valid
+\emph{stopping rule} on expensive signal computation.
+
+\paragraph{Setup.} Fix a base rate $\pi = \pr(Y = 1)$ and per-signal
+calibrators $f_i$ with $p_i(x) = f_i(S_i(x)) = \pr(Y = 1 \given S_i(x))$.
+Define the per-signal likelihood ratio
+\begin{equation}\label{eq:eprocess-ei}
+  E_i(x) \;=\; \frac{p_i(x) / (1 - p_i(x))}{\pi / (1 - \pi)}
+  \;=\; \frac{p_i(x)}{1 - p_i(x)} \cdot \frac{1 - \pi}{\pi}.
+\end{equation}
+
+\begin{lemma}[Per-signal e-value]\label{lem:eval}
+Under calibration of $S_i$, $\expec[E_i(X) \given Y = 0] = 1$ and
+$\expec[E_i(X) \given Y = 1] = \expec[p_i / (1 - p_i) \given Y = 1] \cdot (1-\pi)/\pi \geq 1$.
+Hence $E_i$ is an e-value for the null $H_0: Y = 0$ versus the
+alternative implied by the calibrator.
+\end{lemma}
+
+\begin{proof}
+By the law of total probability,
+$\expec[p_i(X) \given Y = 0] = \int \pr(Y=1 \given S_i=s) \pr(S_i=s \given Y=0) \, ds = \pr(Y=1 \given Y=0, \text{baseline}) = \pi(1-p_i)/(1-\pi)$
+after a short Bayes manipulation. Plugging into \eqref{eq:eprocess-ei}
+gives $\expec[E_i \given Y=0] = 1$. The alternative-direction
+inequality follows from the data-processing inequality applied to
+the calibrated likelihood ratio. \qed
+\end{proof}
+
+\begin{theorem}[Anytime-valid sequential fusion]\label{thm:eprocess}
+Under Assumption~\ref{ass:ci} (conditional independence of signals
+given $Y$) and per-signal calibration (Assumption~\ref{ass:cal}), the
+cumulative product
+\[
+  M_t(x) \;=\; \prod_{i=1}^t E_i(x),
+  \qquad M_0(x) = 1,
+\]
+is a nonnegative $\sigma(S_1, \ldots, S_t)$-martingale under $H_0: Y = 0$
+with $\expec[M_0] = 1$. By Ville's inequality
+\citep{ville1939,howard2021timeuniform},
+\[
+  \pr\!\left( \sup_{t \leq n} M_t(X) \geq 1/\alpha \,\Big|\, Y = 0 \right)
+  \;\leq\; \alpha,
+\]
+uniformly over all stopping times $\tau \leq n$. Consequently the
+decision rule
+\[
+  \text{decide $Y = 1$ at time $\tau = \min\{t : M_t \geq 1/\alpha\}$}
+\]
+has Type-I error at most $\alpha$, regardless of the order in which
+signals are consumed.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Martingale property: $\expec[M_{t+1} \given \mathcal{F}_t] = M_t \cdot \expec[E_{t+1}(X) \given \mathcal{F}_t, Y=0] = M_t \cdot 1 = M_t$,
+where the inner conditional expectation equals $1$ by
+Lemma~\ref{lem:eval} combined with Assumption~\ref{ass:ci} (which
+ensures that future signals' e-values are conditionally independent
+of past signals given $Y$). Ville's inequality then bounds the
+probability that the supremum ever exceeds $1/\alpha$. The decision
+rule's Type-I error is exactly this supremum probability. \qed
+\end{proof}
+
+\begin{corollary}[SPRT-style expected stopping time]\label{cor:sprt}
+Under $H_1: Y = 1$, the expected stopping time is bounded by
+$\tau_{\max} = \log(1/\alpha) / \bar{D}$, where
+$\bar{D} = \expec[\log E_i(X) \given Y = 1]$ is the mean per-signal
+Kullback--Leibler divergence between the calibrated-positive and
+calibrated-negative distributions. A symmetric bound applies under
+$H_0$ with $\alpha$ and $1/\alpha$ swapped and KL from $Y=0$.
+\end{corollary}
+
+The practical consequence: the more informative the per-signal
+calibrator (i.e.\ the larger $\bar{D}$), the earlier the rule stops.
+In retrieval this means expensive-but-informative signals (cross-
+encoder rerank) drive large $\bar{D}$ and should be consumed
+\emph{last} --- cheap-but-mildly-informative signals (BM25) keep
+the e-process bounded away from 1 and give us information per
+computation-unit at the start.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Cormack et~al.(2009)]{cormack2009rrf}
+G.\,V.~Cormack, C.\,L.\,A.~Clarke, and S.~B\"uttcher. Reciprocal rank
+fusion outperforms Condorcet and individual rank learning methods.
+\emph{SIGIR}, 2009.
+
+\bibitem[Dawid(1982)]{dawid1982wellcal}
+A.\,P.~Dawid. The well-calibrated Bayesian. \emph{JASA}, 77(379):605--613, 1982.
+
+\bibitem[DeGroot and Fienberg(1983)]{degroot1983comparison}
+M.\,H.~DeGroot and S.\,E.~Fienberg. The comparison and evaluation of
+forecasters. \emph{The Statistician}, 32(1-2):12--22, 1983.
+
+\bibitem[H\'ebert-Johnson et~al.(2018)]{hkrr2018multicalibration}
+\'U.~H\'ebert-Johnson, M.\,P.~Kim, O.~Reingold, and G.\,N.~Rothblum.
+Multicalibration: Calibration for the (computationally-identifiable)
+masses. \emph{ICML}, 2018.
+
+\bibitem[Howard et~al.(2021)]{howard2021timeuniform}
+S.\,R.~Howard, A.~Ramdas, J.~McAuliffe, and J.~Sekhon. Time-uniform,
+nonparametric, nonasymptotic confidence sequences. \emph{Annals of
+Statistics}, 49(2):1055--1080, 2021.
+
+\bibitem[Ville(1939)]{ville1939}
+J.~Ville. \emph{\'Etude critique de la notion de collectif}.
+Gauthier-Villars, 1939.
+
+\bibitem[Vovk(2003)]{vovk2003mondrian}
+V.~Vovk. Mondrian confidence machine. Unpublished manuscript, 2003.
+
+\bibitem[Vovk and Petej(2014)]{vovk2014vennabers}
+V.~Vovk and I.~Petej. Venn-Abers predictors. \emph{UAI}, 2014.
+
+\bibitem[Ledoit and Wolf(2004)]{ledoitwolf2004}
+O.~Ledoit and M.~Wolf. A well-conditioned estimator for
+large-dimensional covariance matrices. \emph{Journal of Multivariate
+Analysis}, 88(2):365--411, 2004.
+
+\bibitem[Nelsen(2006)]{nelsen2006copula}
+R.\,B.~Nelsen. \emph{An Introduction to Copulas}. Springer, 2006.
+
+\bibitem[Pinsker(1964)]{pinsker1964information}
+M.\,S.~Pinsker. \emph{Information and Information Stability of Random
+Variables and Processes}. Holden-Day, 1964.
+
+\bibitem[Sklar(1959)]{sklar1959}
+A.~Sklar. Fonctions de r\'epartition \`a $n$ dimensions et leurs
+marges. \emph{Publications de l'Institut de Statistique de l'Universit\'e
+de Paris}, 8:229--231, 1959.
+
+\bibitem[Fisher(1915)]{fisher1915frequency}
+R.\,A.~Fisher. Frequency distribution of the values of the correlation
+coefficient in samples from an indefinitely large population.
+\emph{Biometrika}, 10(4):507--521, 1915.
+
+\bibitem[Holm(1979)]{holm1979simple}
+S.~Holm. A simple sequentially rejective multiple test procedure.
+\emph{Scandinavian Journal of Statistics}, 6(2):65--70, 1979.
+
+\bibitem[MacKay(2003)]{mackay2003information}
+D.\,J.\,C.~MacKay. \emph{Information Theory, Inference, and Learning
+Algorithms}. Cambridge University Press, 2003.
+
+\bibitem[Massey(1951)]{massey1951ksmirnov}
+F.\,J.~Massey. The Kolmogorov-Smirnov test for goodness of fit. \emph{JASA},
+46(253):68--78, 1951.
+
+\bibitem[Murphy(1973)]{murphy1973newvector}
+A.\,H.~Murphy. A new vector partition of the probability score.
+\emph{Journal of Applied Meteorology}, 12(4):595--600, 1973.
+
+\bibitem[Ovadia et~al.(2019)]{ovadia2019cantrust}
+Y.~Ovadia et~al. Can you trust your model's uncertainty? Evaluating
+predictive uncertainty under dataset shift. \emph{NeurIPS}, 2019.
+
+\bibitem[Villani(2009)]{villani2009optimal}
+C.~Villani. \emph{Optimal Transport: Old and New}. Springer, 2009.
+
+\bibitem[Wilks(1938)]{wilks1938ratio}
+S.\,S.~Wilks. The large-sample distribution of the likelihood ratio for
+testing composite hypotheses. \emph{Annals of Mathematical Statistics},
+9(1):60--62, 1938.
+
+\end{thebibliography}
+
+\end{document}

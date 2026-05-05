@@ -1,0 +1,143 @@
+{
+  "_type": "calfuse_cal_size_ablation",
+  "n_pairs_test": 3698,
+  "results": [
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.0071910076616672446,
+      "method": "linear_learned",
+      "n_cal_pairs": 616,
+      "n_cal_queries": 15,
+      "ndcg_10": 0.748132401577775,
+      "worst_subgroup_ece_15": 0.0220977957053543
+    },
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.005197686320313763,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 616,
+      "n_cal_queries": 15,
+      "ndcg_10": 0.7510286128910093,
+      "worst_subgroup_ece_15": 0.022938708057090713
+    },
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.007922939998285332,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 616,
+      "n_cal_queries": 15,
+      "ndcg_10": 0.7404910790903796,
+      "worst_subgroup_ece_15": 0.03491002056489991
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.008481803825816831,
+      "method": "linear_learned",
+      "n_cal_pairs": 1563,
+      "n_cal_queries": 38,
+      "ndcg_10": 0.7435647123740354,
+      "worst_subgroup_ece_15": 0.022647325003982584
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.008165277623872213,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 1563,
+      "n_cal_queries": 38,
+      "ndcg_10": 0.7547189703763949,
+      "worst_subgroup_ece_15": 0.021644846680880594
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.008165277623872213,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 1563,
+      "n_cal_queries": 38,
+      "ndcg_10": 0.7547189703763949,
+      "worst_subgroup_ece_15": 0.021644846680880594
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.006953951075432579,
+      "method": "linear_learned",
+      "n_cal_pairs": 3081,
+      "n_cal_queries": 75,
+      "ndcg_10": 0.7505806466954994,
+      "worst_subgroup_ece_15": 0.024325626026363643
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.00510363599951475,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 3081,
+      "n_cal_queries": 75,
+      "ndcg_10": 0.7475144451799534,
+      "worst_subgroup_ece_15": 0.021049795739502067
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.00510363599951475,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 3081,
+      "n_cal_queries": 75,
+      "ndcg_10": 0.7475144451799534,
+      "worst_subgroup_ece_15": 0.021049795739502067
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.0051015307089794576,
+      "method": "linear_learned",
+      "n_cal_pairs": 4606,
+      "n_cal_queries": 112,
+      "ndcg_10": 0.7545828991964404,
+      "worst_subgroup_ece_15": 0.020460514540701514
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.004091110954863938,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 4606,
+      "n_cal_queries": 112,
+      "ndcg_10": 0.7513563835179246,
+      "worst_subgroup_ece_15": 0.021652074659038928
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.003499958466444311,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 4606,
+      "n_cal_queries": 112,
+      "ndcg_10": 0.7484270481407598,
+      "worst_subgroup_ece_15": 0.020568654841872442
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.006015947003456237,
+      "method": "linear_learned",
+      "n_cal_pairs": 6168,
+      "n_cal_queries": 150,
+      "ndcg_10": 0.748923600722803,
+      "worst_subgroup_ece_15": 0.022128347414033866
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.004473658063329287,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 6168,
+      "n_cal_queries": 150,
+      "ndcg_10": 0.7457229112781213,
+      "worst_subgroup_ece_15": 0.020599281997178268
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.004230941667678029,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 6168,
+      "n_cal_queries": 150,
+      "ndcg_10": 0.7462098418429974,
+      "worst_subgroup_ece_15": 0.020599281997178268
+    }
+  ],
+  "source_npz": "eval/beir_scifact_results.npz",
+  "test_positive_rate": 0.02650081124932396
+}

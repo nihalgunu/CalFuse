@@ -1,0 +1,72 @@
+{
+  "scidocs": {
+    "signal_dependence": {
+      "max_abs_z": 257.5845848838998,
+      "min_p_value": 0.0,
+      "reject": true,
+      "max_pair_corr": 0.8914385204324821,
+      "off_diagonal_mass": -0.2106994695830637
+    },
+    "calibration_drift": {
+      "per_signal_ks": {
+        "bm25": 0.01847731644592554,
+        "dense_bge": 0.010718307369859792,
+        "dense_e5": 0.007057364393631915,
+        "cross_encoder": 0.017622053616450306,
+        "ppr_graph": 0.02328958830018879,
+        "minhash_lsh": 0.0032067685928207634
+      },
+      "per_signal_p": {
+        "bm25": 0.00025552637233349623,
+        "dense_bge": 0.09762912362169329,
+        "dense_e5": 0.5286980452325629,
+        "cross_encoder": 0.0005745512948507477,
+        "ppr_graph": 1.3082798339246758e-06,
+        "minhash_lsh": 0.9992245248240158
+      },
+      "reject": true,
+      "worst_signal": "ppr_graph"
+    },
+    "fusion_mismatch": {
+      "chi2": 793.4062116850982,
+      "p_value": 0.0,
+      "reject": true
+    },
+    "auto_switch_decision": "copula"
+  },
+  "touche-2020": {
+    "signal_dependence": {
+      "max_abs_z": 63.71188896686885,
+      "min_p_value": 0.0,
+      "reject": true,
+      "max_pair_corr": 0.9252864852345172,
+      "off_diagonal_mass": -0.29486678422975665
+    },
+    "calibration_drift": {
+      "per_signal_ks": {
+        "bm25": 0.055547478943117574,
+        "dense_bge": 0.06859928464289836,
+        "dense_e5": 0.08110072689511942,
+        "cross_encoder": 0.043667935848621206,
+        "ppr_graph": 0.06551978770047306,
+        "minhash_lsh": 0.021739933079496943
+      },
+      "per_signal_p": {
+        "bm25": 0.01493265891901495,
+        "dense_bge": 0.0011542492373336633,
+        "dense_e5": 6.0023959221394566e-05,
+        "cross_encoder": 0.09623616529474954,
+        "ppr_graph": 0.002216513289389141,
+        "minhash_lsh": 0.8411921507623571
+      },
+      "reject": true,
+      "worst_signal": "dense_e5"
+    },
+    "fusion_mismatch": {
+      "chi2": 88.76883301086787,
+      "p_value": 2.629585438285176e-10,
+      "reject": true
+    },
+    "auto_switch_decision": "copula"
+  }
+}

@@ -1,0 +1,542 @@
+{
+  "nfcorpus": {
+    "pi_cal": 0.47447386561777705,
+    "n_test": 13841,
+    "alphas": {
+      "0.05": {
+        "ville": {
+          "empirical_type1": 0.0,
+          "empirical_type2": 0.009209011675711231,
+          "abstention_rate": 0.9874286539989885,
+          "mean_stopping_time": 5.945451918214002,
+          "compute_savings": 0.011640815054738796,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9921248464706307,
+            0.9883678924933169,
+            0.9883678924933169,
+            0.9882956433783686,
+            0.9882956433783686
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.04213917525773196,
+          "empirical_type2": 0.022858082552211806,
+          "abstention_rate": 0.8730583050357633,
+          "mean_stopping_time": 5.7836139007297165,
+          "compute_savings": 0.06477992142967581,
+          "upper_threshold": 2.2472428093742463,
+          "lower_threshold": 0.10228508527630666,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9770970305613756,
+            0.9711726031356116,
+            0.9711726031356116,
+            0.9407557257423597,
+            0.9234159381547576
+          ]
+        }
+      },
+      "0.10": {
+        "ville": {
+          "empirical_type1": 0.0,
+          "empirical_type2": 0.022364742641012993,
+          "abstention_rate": 0.9690051296871613,
+          "mean_stopping_time": 5.865472147966187,
+          "compute_savings": 0.028107494445407943,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9776750234809624,
+            0.9721840907448884,
+            0.9721840907448884,
+            0.9717505960551983,
+            0.97167834694025
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.09291237113402062,
+          "empirical_type2": 0.04324946554842953,
+          "abstention_rate": 0.7424319052091611,
+          "mean_stopping_time": 5.514847193121884,
+          "compute_savings": 0.1456913993194464,
+          "upper_threshold": 2.177738472406497,
+          "lower_threshold": 0.17005073522509123,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9447294270645185,
+            0.9341810562820605,
+            0.9341810562820605,
+            0.8760205187486453,
+            0.8257351347445994
+          ]
+        }
+      },
+      "0.20": {
+        "ville": {
+          "empirical_type1": 0.0,
+          "empirical_type2": 0.04982733103108041,
+          "abstention_rate": 0.9115670833032296,
+          "mean_stopping_time": 5.59128675673723,
+          "compute_savings": 0.08431401112730508,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.927317390361968,
+            0.9167690195795102,
+            0.9167690195795102,
+            0.91546853551044,
+            0.9149627917058016
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.2009020618556701,
+          "empirical_type2": 0.07087650057556323,
+          "abstention_rate": 0.5178094068347663,
+          "mean_stopping_time": 4.857163499747128,
+          "compute_savings": 0.33931949805927575,
+          "upper_threshold": 2.0928548496959785,
+          "lower_threshold": 0.27739957682427796,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.8773932519326638,
+            0.8658333935409291,
+            0.8040604002600968,
+            0.7037063795968499,
+            0.6061700744165884
+          ]
+        }
+      }
+    }
+  },
+  "scifact": {
+    "pi_cal": 0.027237354085603113,
+    "n_test": 3698,
+    "alphas": {
+      "0.05": {
+        "ville": {
+          "empirical_type1": 0.04972222222222222,
+          "empirical_type2": 0.15306122448979592,
+          "abstention_rate": 0.21038399134667388,
+          "mean_stopping_time": 4.852082206598161,
+          "compute_savings": 0.5179320453172152,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.997025419145484,
+            0.9951325040562466,
+            0.9951325040562466,
+            0.5446187128177393,
+            0.32017306652244454
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.04666666666666667,
+          "empirical_type2": 0.0,
+          "abstention_rate": 0.8907517577068685,
+          "mean_stopping_time": 5.9129259058950785,
+          "compute_savings": 0.03745664088168099,
+          "upper_threshold": 24.30279442179406,
+          "lower_threshold": 1.202745996991586e-07,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9975662520281233,
+            0.9964845862628448,
+            0.9964845862628448,
+            0.9718766901027582,
+            0.9505137912385073
+          ]
+        }
+      },
+      "0.10": {
+        "ville": {
+          "empirical_type1": 0.06305555555555556,
+          "empirical_type2": 0.17346938775510204,
+          "abstention_rate": 0.1517036235803137,
+          "mean_stopping_time": 4.620335316387236,
+          "compute_savings": 0.5951117163428423,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.99269875608437,
+            0.9894537587885344,
+            0.9894537587885344,
+            0.41238507301243915,
+            0.23634396971335858
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.08861111111111111,
+          "empirical_type2": 0.01020408163265306,
+          "abstention_rate": 0.8034072471606274,
+          "mean_stopping_time": 5.76473769605192,
+          "compute_savings": 0.08497330188164043,
+          "upper_threshold": 4.450422787134056,
+          "lower_threshold": 1.1290982936977362e-06,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9840454299621417,
+            0.9751216873985938,
+            0.9751216873985938,
+            0.9386154678204435,
+            0.8918334234721471
+          ]
+        }
+      },
+      "0.20": {
+        "ville": {
+          "empirical_type1": 0.08305555555555555,
+          "empirical_type2": 0.22448979591836735,
+          "abstention_rate": 0.08572201189832342,
+          "mean_stopping_time": 4.3510005408328825,
+          "compute_savings": 0.6793116448190148,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9843158464034614,
+            0.9726879394267172,
+            0.9726879394267172,
+            0.2752839372633856,
+            0.1460248783126014
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.16083333333333333,
+          "empirical_type2": 0.030612244897959183,
+          "abstention_rate": 0.6468361276365603,
+          "mean_stopping_time": 5.366414277988102,
+          "compute_savings": 0.1925884755030891,
+          "upper_threshold": 1.4258619426507995,
+          "lower_threshold": 1.7317108046729028e-05,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9342888047593294,
+            0.9026500811249324,
+            0.9026500811249324,
+            0.8604651162790697,
+            0.7663601946998377
+          ]
+        }
+      }
+    }
+  },
+  "arguana": {
+    "pi_cal": 0.02435639442092846,
+    "n_test": 17299,
+    "alphas": {
+      "0.05": {
+        "ville": {
+          "empirical_type1": 0.02849526066350711,
+          "empirical_type2": 0.0,
+          "abstention_rate": 0.8575640210416787,
+          "mean_stopping_time": 5.885311289669923,
+          "compute_savings": 0.07064858298939547,
+          "per_signal_consumption_rate": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.9916758194115267,
+            0.8936354702583964
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.047511848341232225,
+          "empirical_type2": 0.0,
+          "abstention_rate": 0.8978553673622752,
+          "mean_stopping_time": 5.895774322215157,
+          "compute_savings": 0.05422165766957976,
+          "upper_threshold": 6.638127066723037,
+          "lower_threshold": 0.024516044436448784,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9994219319035782,
+            0.9994219319035782,
+            0.9994219319035782,
+            0.9741025492803053,
+            0.923405977224117
+          ]
+        }
+      },
+      "0.10": {
+        "ville": {
+          "empirical_type1": 0.03696682464454976,
+          "empirical_type2": 0.0,
+          "abstention_rate": 0.7382507659402278,
+          "mean_stopping_time": 5.746285912480491,
+          "compute_savings": 0.14260205585116947,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9997109659517891,
+            0.9997109659517891,
+            0.9997109659517891,
+            0.954621654430892,
+            0.7925313601942309
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.09407582938388626,
+          "empirical_type2": 0.0,
+          "abstention_rate": 0.7943233712931383,
+          "mean_stopping_time": 5.785767963466096,
+          "compute_savings": 0.11058612150765434,
+          "upper_threshold": 3.144502804823938,
+          "lower_threshold": 0.04323928458228471,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9956644892768368,
+            0.9956644892768368,
+            0.9956644892768368,
+            0.9564136655297995,
+            0.8423608301057864
+          ]
+        }
+      },
+      "0.20": {
+        "ville": {
+          "empirical_type1": 0.06119668246445498,
+          "empirical_type2": 0.016706443914081145,
+          "abstention_rate": 0.5600901786230418,
+          "mean_stopping_time": 5.477715474882941,
+          "compute_savings": 0.26914812910237707,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9991328978553674,
+            0.9991328978553674,
+            0.9991328978553674,
+            0.8576218278513209,
+            0.6226949534655183
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.1928909952606635,
+          "empirical_type2": 0.0,
+          "abstention_rate": 0.5996878432279322,
+          "mean_stopping_time": 5.428579686687092,
+          "compute_savings": 0.24651968171231675,
+          "upper_threshold": 1.5906959677867545,
+          "lower_threshold": 0.08617836931980205,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9679172206485924,
+            0.9675125729810972,
+            0.9675125729810972,
+            0.8599341002370079,
+            0.665703219839297
+          ]
+        }
+      }
+    }
+  },
+  "fiqa": {
+    "pi_cal": 0.06013344795120554,
+    "n_test": 14632,
+    "alphas": {
+      "0.05": {
+        "ville": {
+          "empirical_type1": 0.02703488372093023,
+          "empirical_type2": 0.04472477064220184,
+          "abstention_rate": 0.6539092400218699,
+          "mean_stopping_time": 5.689584472389284,
+          "compute_savings": 0.18248522269694023,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9991115363586659,
+            0.9991115363586659,
+            0.9991115363586659,
+            0.9628212137780208,
+            0.7294286495352652
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.04760174418604651,
+          "empirical_type2": 0.005733944954128441,
+          "abstention_rate": 0.8735647895024604,
+          "mean_stopping_time": 5.92741935483871,
+          "compute_savings": 0.04631542485080231,
+          "upper_threshold": 11.16054754261611,
+          "lower_threshold": 0.0014809529255960278,
+          "per_signal_consumption_rate": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.9980180426462548,
+            0.9294013121924549
+          ]
+        }
+      },
+      "0.10": {
+        "ville": {
+          "empirical_type1": 0.05181686046511628,
+          "empirical_type2": 0.09059633027522936,
+          "abstention_rate": 0.5338983050847458,
+          "mean_stopping_time": 5.509431383269546,
+          "compute_savings": 0.2668222609674391,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9974712957900492,
+            0.9974712957900492,
+            0.9974712957900492,
+            0.901175505740842,
+            0.6158419901585566
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.09324127906976744,
+          "empirical_type2": 0.011467889908256881,
+          "abstention_rate": 0.7709130672498633,
+          "mean_stopping_time": 5.829004920721706,
+          "compute_savings": 0.10413034302577184,
+          "upper_threshold": 5.061653712854773,
+          "lower_threshold": 0.004763071325298624,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9999316566429743,
+            0.9999316566429743,
+            0.9999316566429743,
+            0.9853745215965009,
+            0.8438354291962821
+          ]
+        }
+      },
+      "0.20": {
+        "ville": {
+          "empirical_type1": 0.09193313953488372,
+          "empirical_type2": 0.15825688073394495,
+          "abstention_rate": 0.37875888463641333,
+          "mean_stopping_time": 5.2035948605795515,
+          "compute_savings": 0.3910005823655439,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.990500273373428,
+            0.990500273373428,
+            0.990500273373428,
+            0.7728266812465828,
+            0.4592673592126845
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.19149709302325582,
+          "empirical_type2": 0.009174311926605505,
+          "abstention_rate": 0.5641744122471296,
+          "mean_stopping_time": 5.477104975396392,
+          "compute_savings": 0.2506141997460388,
+          "upper_threshold": 2.012676264720926,
+          "lower_threshold": 0.01862769257259545,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9822307271733187,
+            0.9821623838162931,
+            0.9820256971022416,
+            0.8804674685620558,
+            0.6502186987424823
+          ]
+        }
+      }
+    }
+  },
+  "trec-covid": {
+    "pi_cal": 0.3628548301560276,
+    "n_test": 18736,
+    "alphas": {
+      "0.05": {
+        "ville": {
+          "empirical_type1": 0.08166341549920199,
+          "empirical_type2": 0.04290694556181282,
+          "abstention_rate": 0.5037894961571306,
+          "mean_stopping_time": 5.522950469684031,
+          "compute_savings": 0.24744556282806263,
+          "per_signal_consumption_rate": [
+            1.0,
+            1.0,
+            0.9984521776259607,
+            0.9984521776259607,
+            0.873932536293766,
+            0.6521135781383433
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.05054087604185139,
+          "empirical_type2": 0.0008045052292839903,
+          "abstention_rate": 0.7594470538001707,
+          "mean_stopping_time": 5.8236016225448335,
+          "compute_savings": 0.1004285153979032,
+          "upper_threshold": 38.29036326818447,
+          "lower_threshold": 0.000207662517351996,
+          "per_signal_consumption_rate": [
+            1.0,
+            1.0,
+            0.9993595217762596,
+            0.9993595217762596,
+            0.9718189581554227,
+            0.8530636208368916
+          ]
+        }
+      },
+      "0.10": {
+        "ville": {
+          "empirical_type1": 0.12280546196134066,
+          "empirical_type2": 0.06288549208903191,
+          "abstention_rate": 0.3922929120409906,
+          "mean_stopping_time": 5.2883219470538005,
+          "compute_savings": 0.34564335724637485,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9997865072587532,
+            0.9955166524338173,
+            0.9955166524338173,
+            0.7691076003415884,
+            0.5283945345858241
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.11127859549565526,
+          "empirical_type2": 0.002413515687851971,
+          "abstention_rate": 0.6290563620836892,
+          "mean_stopping_time": 5.623505550811273,
+          "compute_savings": 0.19355377096331816,
+          "upper_threshold": 11.876837216788093,
+          "lower_threshold": 0.0009551859295913194,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9998932536293766,
+            0.9966908625106746,
+            0.9966908625106746,
+            0.9019000853970965,
+            0.72833048676345
+          ]
+        }
+      },
+      "0.20": {
+        "ville": {
+          "empirical_type1": 0.17689306614647987,
+          "empirical_type2": 0.0890319120407616,
+          "abstention_rate": 0.2660653287788215,
+          "mean_stopping_time": 4.940755764304014,
+          "compute_savings": 0.473119386253571,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9957301451750641,
+            0.984201537147737,
+            0.984201537147737,
+            0.5979931682322801,
+            0.37862937660119556
+          ]
+        },
+        "conformal": {
+          "empirical_type1": 0.21963114027309807,
+          "empirical_type2": 0.0111289890050952,
+          "abstention_rate": 0.44758753202391116,
+          "mean_stopping_time": 5.134500426985483,
+          "compute_savings": 0.3553358929281747,
+          "upper_threshold": 3.280318297760057,
+          "lower_threshold": 0.006444714198004616,
+          "per_signal_consumption_rate": [
+            1.0,
+            0.9799850555081128,
+            0.9573014517506405,
+            0.9573014517506405,
+            0.6980145175064048,
+            0.541897950469684
+          ]
+        }
+      }
+    }
+  }
+}

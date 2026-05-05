@@ -1,0 +1,70 @@
+{
+  "trec-covid": {
+    "signal_dependence": {
+      "max_abs_z": 174.5838442443859,
+      "min_p_value": 0.0,
+      "reject": true,
+      "max_pair_corr": 0.8196013189696593
+    },
+    "calibration_drift": {
+      "per_signal_ks": {
+        "bm25": 0.05512633214119367,
+        "dense_bge": 0.11185089673387039,
+        "dense_e5": 0.08456234476681601,
+        "cross_encoder": 0.09686446696344175,
+        "ppr_graph": 0.024576077736409407,
+        "minhash_lsh": 0.03357983927745389
+      },
+      "per_signal_p": {
+        "bm25": 6.190673930356365e-33,
+        "dense_bge": 1.644435595851062e-134,
+        "dense_e5": 5.585634034651965e-77,
+        "cross_encoder": 6.406650541869498e-101,
+        "ppr_graph": 6.908252244739049e-07,
+        "minhash_lsh": 1.7362208403688434e-12
+      },
+      "reject": true,
+      "worst_signal": "dense_bge"
+    },
+    "fusion_mismatch": {
+      "chi2": 0.0,
+      "p_value": 1.0,
+      "reject": false
+    },
+    "auto_switch_decision": "copula"
+  },
+  "fiqa": {
+    "signal_dependence": {
+      "max_abs_z": 177.2692362939521,
+      "min_p_value": 0.0,
+      "reject": true,
+      "max_pair_corr": 0.841342951864975
+    },
+    "calibration_drift": {
+      "per_signal_ks": {
+        "bm25": 0.02598942683029093,
+        "dense_bge": 0.028208209345071844,
+        "dense_e5": 0.021259467271295462,
+        "cross_encoder": 0.02895961978253625,
+        "ppr_graph": 0.01426451670646356,
+        "minhash_lsh": 0.006086520222483016
+      },
+      "per_signal_p": {
+        "bm25": 8.395371068838698e-06,
+        "dense_bge": 9.274352223787119e-07,
+        "dense_e5": 0.0005037047702580241,
+        "cross_encoder": 4.221940656362424e-07,
+        "ppr_graph": 0.047811918288864885,
+        "minhash_lsh": 0.8847672691283565
+      },
+      "reject": true,
+      "worst_signal": "cross_encoder"
+    },
+    "fusion_mismatch": {
+      "chi2": 1422.5025314855538,
+      "p_value": 0.0,
+      "reject": true
+    },
+    "auto_switch_decision": "copula"
+  }
+}

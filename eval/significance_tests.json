@@ -1,0 +1,187 @@
+{
+  "nfcorpus": {
+    "n_test_queries": 194,
+    "vs_conformal": {
+      "bm25_platt": {
+        "n_paired_queries": 194,
+        "mean_delta_ndcg": 0.08670792808529931,
+        "ci95_lo": 0.056094657641813504,
+        "ci95_hi": 0.11804531272822902,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.4896907216494845
+      },
+      "bge_platt": {
+        "n_paired_queries": 194,
+        "mean_delta_ndcg": 0.19586207737986164,
+        "ci95_lo": 0.13512439607679647,
+        "ci95_hi": 0.2584128523600944,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.6597938144329897
+      },
+      "e5_platt": {
+        "n_paired_queries": 194,
+        "mean_delta_ndcg": 0.3649833538593504,
+        "ci95_lo": 0.31814402443822976,
+        "ci95_hi": 0.4140174130120893,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.8505154639175257
+      },
+      "linear_learned": {
+        "n_paired_queries": 194,
+        "mean_delta_ndcg": 0.0005022481001829872,
+        "ci95_lo": -0.007434623584874542,
+        "ci95_hi": 0.008921821554144456,
+        "boot_p_value": 0.908,
+        "frac_queries_conformal_better": 0.21649484536082475
+      }
+    }
+  },
+  "scifact": {
+    "n_test_queries": 90,
+    "vs_conformal": {
+      "bm25_platt": {
+        "n_paired_queries": 90,
+        "mean_delta_ndcg": 0.04828595262374036,
+        "ci95_lo": -0.006503224828383054,
+        "ci95_hi": 0.09990530730854108,
+        "boot_p_value": 0.079,
+        "frac_queries_conformal_better": 0.23333333333333334
+      },
+      "bge_platt": {
+        "n_paired_queries": 90,
+        "mean_delta_ndcg": -0.04298609611888263,
+        "ci95_lo": -0.08737963748838544,
+        "ci95_hi": 0.0011887468748760458,
+        "boot_p_value": 0.059,
+        "frac_queries_conformal_better": 0.1
+      },
+      "e5_platt": {
+        "n_paired_queries": 90,
+        "mean_delta_ndcg": -0.023054865275214307,
+        "ci95_lo": -0.06800594395400088,
+        "ci95_hi": 0.018221528577872386,
+        "boot_p_value": 0.307,
+        "frac_queries_conformal_better": 0.14444444444444443
+      },
+      "linear_learned": {
+        "n_paired_queries": 90,
+        "mean_delta_ndcg": -0.02622658707494383,
+        "ci95_lo": -0.06301552624364389,
+        "ci95_hi": 0.003574934653332739,
+        "boot_p_value": 0.093,
+        "frac_queries_conformal_better": 0.05555555555555555
+      }
+    }
+  },
+  "arguana": {
+    "n_test_queries": 422,
+    "vs_conformal": {
+      "bm25_platt": {
+        "n_paired_queries": 419,
+        "mean_delta_ndcg": 0.3379810995824783,
+        "ci95_lo": 0.30588353355493286,
+        "ci95_hi": 0.37111947164670456,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.7732696897374701
+      },
+      "bge_platt": {
+        "n_paired_queries": 419,
+        "mean_delta_ndcg": 0.19167755000680645,
+        "ci95_lo": 0.1720192363548976,
+        "ci95_hi": 0.21037677613847686,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.7255369928400954
+      },
+      "e5_platt": {
+        "n_paired_queries": 419,
+        "mean_delta_ndcg": 0.2813799555289135,
+        "ci95_lo": 0.2548148982386803,
+        "ci95_hi": 0.3080820632381741,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.7971360381861575
+      },
+      "linear_learned": {
+        "n_paired_queries": 419,
+        "mean_delta_ndcg": -0.0033727789681156617,
+        "ci95_lo": -0.016269847630545495,
+        "ci95_hi": 0.009066118755037208,
+        "boot_p_value": 0.614,
+        "frac_queries_conformal_better": 0.14081145584725538
+      }
+    }
+  },
+  "fiqa": {
+    "n_test_queries": 344,
+    "vs_conformal": {
+      "bm25_platt": {
+        "n_paired_queries": 344,
+        "mean_delta_ndcg": 0.15695709901391477,
+        "ci95_lo": 0.1126521405371101,
+        "ci95_hi": 0.20349868075100008,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.5290697674418605
+      },
+      "bge_platt": {
+        "n_paired_queries": 344,
+        "mean_delta_ndcg": 0.16178505510788949,
+        "ci95_lo": 0.11943082744140186,
+        "ci95_hi": 0.20159731720550786,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.6017441860465116
+      },
+      "e5_platt": {
+        "n_paired_queries": 344,
+        "mean_delta_ndcg": 0.12330186018457458,
+        "ci95_lo": 0.08690964447668423,
+        "ci95_hi": 0.1599916768932287,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 0.5552325581395349
+      },
+      "linear_learned": {
+        "n_paired_queries": 344,
+        "mean_delta_ndcg": 0.013070084256622112,
+        "ci95_lo": -0.0013258981496030407,
+        "ci95_hi": 0.028205347820321608,
+        "boot_p_value": 0.075,
+        "frac_queries_conformal_better": 0.25872093023255816
+      }
+    }
+  },
+  "trec-covid": {
+    "n_test_queries": 15,
+    "vs_conformal": {
+      "bm25_platt": {
+        "n_paired_queries": 15,
+        "mean_delta_ndcg": 0.2560244141554047,
+        "ci95_lo": 0.18003906679014414,
+        "ci95_hi": 0.3389268946846503,
+        "boot_p_value": 0.0,
+        "frac_queries_conformal_better": 1.0
+      },
+      "bge_platt": {
+        "n_paired_queries": 15,
+        "mean_delta_ndcg": -0.0010293187041352217,
+        "ci95_lo": -0.041695237054117484,
+        "ci95_hi": 0.03654267611770188,
+        "boot_p_value": 0.988,
+        "frac_queries_conformal_better": 0.4666666666666667
+      },
+      "e5_platt": {
+        "n_paired_queries": 15,
+        "mean_delta_ndcg": 0.06294352388172442,
+        "ci95_lo": 0.015794767588972494,
+        "ci95_hi": 0.11054217419845663,
+        "boot_p_value": 0.007,
+        "frac_queries_conformal_better": 0.6666666666666666
+      },
+      "linear_learned": {
+        "n_paired_queries": 15,
+        "mean_delta_ndcg": 0.012420656455924273,
+        "ci95_lo": -0.03057466180603714,
+        "ci95_hi": 0.06148528737831545,
+        "boot_p_value": 0.632,
+        "frac_queries_conformal_better": 0.3333333333333333
+      }
+    }
+  }
+}

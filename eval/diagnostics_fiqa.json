@@ -1,0 +1,36 @@
+{
+  "fiqa": {
+    "signal_dependence": {
+      "max_abs_z": 177.2692362939521,
+      "min_p_value": 0.0,
+      "reject": true,
+      "max_pair_corr": 0.841342951864975
+    },
+    "calibration_drift": {
+      "per_signal_ks": {
+        "bm25": 0.02598942683029093,
+        "dense_bge": 0.028208209345071844,
+        "dense_e5": 0.021259467271295462,
+        "cross_encoder": 0.02895961978253625,
+        "ppr_graph": 0.01426451670646356,
+        "minhash_lsh": 0.006086520222483016
+      },
+      "per_signal_p": {
+        "bm25": 8.395371068838698e-06,
+        "dense_bge": 9.274352223787119e-07,
+        "dense_e5": 0.0005037047702580241,
+        "cross_encoder": 4.221940656362424e-07,
+        "ppr_graph": 0.047811918288864885,
+        "minhash_lsh": 0.8847672691283565
+      },
+      "reject": true,
+      "worst_signal": "cross_encoder"
+    },
+    "fusion_mismatch": {
+      "chi2": 1422.5025314855538,
+      "p_value": 0.0,
+      "reject": true
+    },
+    "auto_switch_decision": "copula"
+  }
+}

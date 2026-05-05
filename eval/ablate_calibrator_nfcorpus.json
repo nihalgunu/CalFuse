@@ -1,0 +1,73 @@
+{
+  "_type": "calfuse_calibrator_ablation",
+  "n_pairs_calibration": 24661,
+  "n_pairs_test": 13841,
+  "results": [
+    {
+      "brier": 0.17886262978442177,
+      "calibrator": "platt",
+      "ece_15": 0.05992495771312719,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.6706319457805697,
+      "worst_subgroup_ece_15": 0.10059471085068163
+    },
+    {
+      "brier": 0.17601882317585585,
+      "calibrator": "platt",
+      "ece_15": 0.04273115202679556,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.661120705921751,
+      "worst_subgroup_ece_15": 0.07000936869334885
+    },
+    {
+      "brier": 0.24596127206148735,
+      "calibrator": "isotonic",
+      "ece_15": 0.038963102560811126,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.4264566471467462,
+      "worst_subgroup_ece_15": 0.41124287694028566
+    },
+    {
+      "brier": 0.21036313326520417,
+      "calibrator": "isotonic",
+      "ece_15": 0.019456363115494587,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.5132203276234572,
+      "worst_subgroup_ece_15": 0.03113472980118589
+    },
+    {
+      "brier": 0.24769539831063264,
+      "calibrator": "temperature",
+      "ece_15": 0.0341103210185322,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.415464678445053,
+      "worst_subgroup_ece_15": 0.41272593770054244
+    },
+    {
+      "brier": 0.21192363086408134,
+      "calibrator": "temperature",
+      "ece_15": 0.021029313655597855,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.4889947089432935,
+      "worst_subgroup_ece_15": 0.0481186323626025
+    },
+    {
+      "brier": 0.1725124402619557,
+      "calibrator": "learned_mlp",
+      "ece_15": 0.04024853899113897,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.6604907601598999,
+      "worst_subgroup_ece_15": 0.0883559240602148
+    },
+    {
+      "brier": 0.17053111025049864,
+      "calibrator": "learned_mlp",
+      "ece_15": 0.042394997940935444,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.653017851531457,
+      "worst_subgroup_ece_15": 0.0395978493580105
+    }
+  ],
+  "source_npz": "eval/beir_nfcorpus_results.npz",
+  "test_positive_rate": 0.439346868000867
+}

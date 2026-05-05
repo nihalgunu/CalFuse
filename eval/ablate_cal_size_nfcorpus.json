@@ -1,0 +1,143 @@
+{
+  "_type": "calfuse_cal_size_ablation",
+  "n_pairs_test": 13841,
+  "results": [
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.03568226141946168,
+      "method": "linear_learned",
+      "n_cal_pairs": 2261,
+      "n_cal_queries": 32,
+      "ndcg_10": 0.6791286600349112,
+      "worst_subgroup_ece_15": 0.06087384533413893
+    },
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.034746829356571335,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 2261,
+      "n_cal_queries": 32,
+      "ndcg_10": 0.6776272276675145,
+      "worst_subgroup_ece_15": 0.05946300464449708
+    },
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.03655998902294773,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 2261,
+      "n_cal_queries": 32,
+      "ndcg_10": 0.6655151457048308,
+      "worst_subgroup_ece_15": 0.0650205873224201
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.03419854387187269,
+      "method": "linear_learned",
+      "n_cal_pairs": 5730,
+      "n_cal_queries": 81,
+      "ndcg_10": 0.6618976946092804,
+      "worst_subgroup_ece_15": 0.10960723271027141
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.034778796307655936,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 5730,
+      "n_cal_queries": 81,
+      "ndcg_10": 0.6657897075196806,
+      "worst_subgroup_ece_15": 0.10997075895651293
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.016047259269241616,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 5730,
+      "n_cal_queries": 81,
+      "ndcg_10": 0.660481487948632,
+      "worst_subgroup_ece_15": 0.04493119820522884
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.0698316867790196,
+      "method": "linear_learned",
+      "n_cal_pairs": 12438,
+      "n_cal_queries": 162,
+      "ndcg_10": 0.6733127952769604,
+      "worst_subgroup_ece_15": 0.09998612019353419
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.07222058193681469,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 12438,
+      "n_cal_queries": 162,
+      "ndcg_10": 0.6713594715052601,
+      "worst_subgroup_ece_15": 0.10017839339873767
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.04949918440545537,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 12438,
+      "n_cal_queries": 162,
+      "ndcg_10": 0.6673538255260228,
+      "worst_subgroup_ece_15": 0.046538224492453525
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.06073297713847753,
+      "method": "linear_learned",
+      "n_cal_pairs": 18579,
+      "n_cal_queries": 243,
+      "ndcg_10": 0.6716814270689139,
+      "worst_subgroup_ece_15": 0.10846004026086818
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.060659337351435305,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 18579,
+      "n_cal_queries": 243,
+      "ndcg_10": 0.672789908339941,
+      "worst_subgroup_ece_15": 0.10758888627174024
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.05306509247907061,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 18579,
+      "n_cal_queries": 243,
+      "ndcg_10": 0.6570219513128626,
+      "worst_subgroup_ece_15": 0.12194900337632003
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.056581563752500105,
+      "method": "linear_learned",
+      "n_cal_pairs": 24661,
+      "n_cal_queries": 324,
+      "ndcg_10": 0.6734326415962416,
+      "worst_subgroup_ece_15": 0.10025434610981711
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.05992495771312719,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 24661,
+      "n_cal_queries": 324,
+      "ndcg_10": 0.6706319457805697,
+      "worst_subgroup_ece_15": 0.10059471085068163
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.04273115202679556,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 24661,
+      "n_cal_queries": 324,
+      "ndcg_10": 0.661120705921751,
+      "worst_subgroup_ece_15": 0.07000936869334885
+    }
+  ],
+  "source_npz": "eval/beir_nfcorpus_results.npz",
+  "test_positive_rate": 0.439346868000867
+}

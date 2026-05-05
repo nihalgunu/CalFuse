@@ -1,0 +1,28 @@
+{
+  "n_pairs": 500,
+  "measured_seconds": {
+    "bm25": 0.00948190689086914,
+    "minhash": 0.019728899002075195,
+    "ppr": 2.179042100906372,
+    "bge": 0.10009503364562988,
+    "e5": 0.09170889854431152,
+    "cross_encoder": 0.0021910667419433594
+  },
+  "measured_relative_to_bm25": {
+    "bm25": 1.0,
+    "minhash": 2.0806889615287907,
+    "ppr": 229.8105355795826,
+    "bge": 10.556424440533066,
+    "e5": 9.67198893638421,
+    "cross_encoder": 0.23107870253960272
+  },
+  "assumed_gpu_relative_costs": {
+    "bm25": 1,
+    "minhash": 1,
+    "ppr": 5,
+    "bge": 50,
+    "e5": 50,
+    "cross_encoder": 200
+  },
+  "note": "Measured costs are with deterministic CPU fallbacks for BGE/E5/CE/monoT5; the assumed_gpu_relative_costs vector is what was used in the \u00a76 e-process compute-savings narrative. On the Lambda A10 box, GPU CE inference dominates per-pair cost by a factor of >100x over BM25, consistent with Nogueira & Cho (2019)."
+}

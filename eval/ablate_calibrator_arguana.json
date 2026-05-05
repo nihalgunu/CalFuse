@@ -1,0 +1,73 @@
+{
+  "_type": "calfuse_calibrator_ablation",
+  "n_pairs_calibration": 28822,
+  "n_pairs_test": 17299,
+  "results": [
+    {
+      "brier": 0.020407433791499934,
+      "calibrator": "platt",
+      "ece_15": 0.004288496448862154,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.686878218060639,
+      "worst_subgroup_ece_15": 0.01621142204512949
+    },
+    {
+      "brier": 0.020453708766875377,
+      "calibrator": "platt",
+      "ece_15": 0.0045270206105334524,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.6845564391162533,
+      "worst_subgroup_ece_15": 0.019809494463047344
+    },
+    {
+      "brier": 0.021420956750015267,
+      "calibrator": "isotonic",
+      "ece_15": 0.002734407363974502,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.5853808977730106,
+      "worst_subgroup_ece_15": 0.020877016979561548
+    },
+    {
+      "brier": 0.02125477432609399,
+      "calibrator": "isotonic",
+      "ece_15": 0.003296783895727568,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.5951880528894666,
+      "worst_subgroup_ece_15": 0.010569905577029984
+    },
+    {
+      "brier": 0.023634443382645972,
+      "calibrator": "temperature",
+      "ece_15": 0.00022262666659042182,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.07026023199380026,
+      "worst_subgroup_ece_15": 0.052199981553563105
+    },
+    {
+      "brier": 0.02320191979445595,
+      "calibrator": "temperature",
+      "ece_15": 0.008950704939904925,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.25102804813723195,
+      "worst_subgroup_ece_15": 0.009235076570021837
+    },
+    {
+      "brier": 0.02036128435356802,
+      "calibrator": "learned_mlp",
+      "ece_15": 0.002956946377363226,
+      "method": "calfuse_parametric",
+      "ndcg_10": 0.6897444251782866,
+      "worst_subgroup_ece_15": 0.016232134156915698
+    },
+    {
+      "brier": 0.020378634959613288,
+      "calibrator": "learned_mlp",
+      "ece_15": 0.0035686894702852486,
+      "method": "calfuse_multical",
+      "ndcg_10": 0.6878885949002634,
+      "worst_subgroup_ece_15": 0.015746134788672636
+    }
+  ],
+  "source_npz": "eval/beir_arguana_results.npz",
+  "test_positive_rate": 0.02422105324007168
+}

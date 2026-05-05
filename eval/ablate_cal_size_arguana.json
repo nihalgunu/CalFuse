@@ -1,0 +1,143 @@
+{
+  "_type": "calfuse_cal_size_ablation",
+  "n_pairs_test": 17299,
+  "results": [
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.006940204311503894,
+      "method": "linear_learned",
+      "n_cal_pairs": 2870,
+      "n_cal_queries": 70,
+      "ndcg_10": 0.6838270345663555,
+      "worst_subgroup_ece_15": 0.022069090418296206
+    },
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.0057996572662251215,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 2870,
+      "n_cal_queries": 70,
+      "ndcg_10": 0.6814649688244283,
+      "worst_subgroup_ece_15": 0.018870752574539504
+    },
+    {
+      "cal_fraction": 0.1,
+      "ece_15": 0.006839875328893066,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 2870,
+      "n_cal_queries": 70,
+      "ndcg_10": 0.6756579266334711,
+      "worst_subgroup_ece_15": 0.02405871580875519
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.005785699804702866,
+      "method": "linear_learned",
+      "n_cal_pairs": 7215,
+      "n_cal_queries": 176,
+      "ndcg_10": 0.6899056864402359,
+      "worst_subgroup_ece_15": 0.022079727481909124
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.006026204111800642,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 7215,
+      "n_cal_queries": 176,
+      "ndcg_10": 0.6798047197617973,
+      "worst_subgroup_ece_15": 0.0226946195142715
+    },
+    {
+      "cal_fraction": 0.25,
+      "ece_15": 0.006026204111800642,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 7215,
+      "n_cal_queries": 176,
+      "ndcg_10": 0.6798047197617973,
+      "worst_subgroup_ece_15": 0.0226946195142715
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.004306804521638439,
+      "method": "linear_learned",
+      "n_cal_pairs": 14431,
+      "n_cal_queries": 352,
+      "ndcg_10": 0.6899987360716959,
+      "worst_subgroup_ece_15": 0.017018657074589254
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.004649393672194721,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 14431,
+      "n_cal_queries": 352,
+      "ndcg_10": 0.68612604466584,
+      "worst_subgroup_ece_15": 0.018017835133920298
+    },
+    {
+      "cal_fraction": 0.5,
+      "ece_15": 0.004945643114894671,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 14431,
+      "n_cal_queries": 352,
+      "ndcg_10": 0.6808490714765886,
+      "worst_subgroup_ece_15": 0.0190174161704449
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.0032140853966169296,
+      "method": "linear_learned",
+      "n_cal_pairs": 21606,
+      "n_cal_queries": 527,
+      "ndcg_10": 0.6893342061265818,
+      "worst_subgroup_ece_15": 0.014974617172412906
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.0038905590609483337,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 21606,
+      "n_cal_queries": 527,
+      "ndcg_10": 0.6863642097924098,
+      "worst_subgroup_ece_15": 0.015202979706885094
+    },
+    {
+      "cal_fraction": 0.75,
+      "ece_15": 0.004347853224845878,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 21606,
+      "n_cal_queries": 527,
+      "ndcg_10": 0.6843394518531468,
+      "worst_subgroup_ece_15": 0.016424094651826922
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.003870124854083054,
+      "method": "linear_learned",
+      "n_cal_pairs": 28822,
+      "n_cal_queries": 703,
+      "ndcg_10": 0.6872448550878629,
+      "worst_subgroup_ece_15": 0.01455166820394643
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.004288496448862154,
+      "method": "calfuse_parametric",
+      "n_cal_pairs": 28822,
+      "n_cal_queries": 703,
+      "ndcg_10": 0.686878218060639,
+      "worst_subgroup_ece_15": 0.01621142204512949
+    },
+    {
+      "cal_fraction": 1.0,
+      "ece_15": 0.0045270206105334524,
+      "method": "calfuse_multical",
+      "n_cal_pairs": 28822,
+      "n_cal_queries": 703,
+      "ndcg_10": 0.6845564391162533,
+      "worst_subgroup_ece_15": 0.019809494463047344
+    }
+  ],
+  "source_npz": "eval/beir_arguana_results.npz",
+  "test_positive_rate": 0.02422105324007168
+}

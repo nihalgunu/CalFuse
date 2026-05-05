@@ -1,0 +1,33 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# data artefacts (raw downloads, processed caches — too large for git)
+data/raw/*
+!data/raw/.gitkeep
+data/beir_subsets/*
+!data/beir_subsets/.gitkeep
+data/mteb_retrieval/*
+!data/mteb_retrieval/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# model / embedding caches
+*.pt
+*.bin
+*.safetensors
+*.npy
+*.faiss
+
+# OS
+.DS_Store
+Thumbs.db
