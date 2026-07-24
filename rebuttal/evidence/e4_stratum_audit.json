@@ -1,0 +1,149 @@
+{
+ "nfcorpus": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 4341,
+    "n_positives": 386,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 4414,
+    "n_positives": 3058,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 3910,
+    "n_positives": 2182,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 24661,
+  "unassigned_pairs": 11996
+ },
+ "scifact": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 918,
+    "n_positives": 50,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 807,
+    "n_positives": 31,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 1144,
+    "n_positives": 27,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 6168,
+  "unassigned_pairs": 3299
+ },
+ "fiqa": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 4714,
+    "n_positives": 141,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 3439,
+    "n_positives": 351,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 3564,
+    "n_positives": 577,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 24429,
+  "unassigned_pairs": 12712
+ },
+ "arguana": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 2639,
+    "n_positives": 47,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 4446,
+    "n_positives": 329,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 4630,
+    "n_positives": 150,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 28822,
+  "unassigned_pairs": 17107
+ },
+ "scidocs": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 5436,
+    "n_positives": 176,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 6040,
+    "n_positives": 1135,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 4076,
+    "n_positives": 418,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 34961,
+  "unassigned_pairs": 19409
+ },
+ "trec-covid": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 6686,
+    "n_positives": 2436,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 4743,
+    "n_positives": 2218,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 5481,
+    "n_positives": 2848,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 35827,
+  "unassigned_pairs": 18917
+ },
+ "touche-2020": {
+  "strata": {
+   "bm25": {
+    "n_cal_pairs": 598,
+    "n_positives": 128,
+    "fallback_to_pooled": false
+   },
+   "dense_bge": {
+    "n_cal_pairs": 245,
+    "n_positives": 85,
+    "fallback_to_pooled": false
+   },
+   "dense_e5": {
+    "n_cal_pairs": 300,
+    "n_positives": 122,
+    "fallback_to_pooled": false
+   }
+  },
+  "n_cal_pairs": 2025,
+  "unassigned_pairs": 882
+ }
+}

@@ -25,6 +25,20 @@ Drafts of the author responses for the discussion phase. One file per reply:
 | Subgroup assignment (argmax standardized input signal; label-free, no feedback from calibrated output) | `src/fusion/multicalibration.py` (`signal_dominance_subgroups`) |
 | Theorem statements (CI fusion, multicalibration preservation, Mondrian–Venn–Abers validity, e-process) | `theory/proofs.tex` |
 
+## New experiments (discussion phase)
+
+`04_new_experiments.md` summarizes five experiments run from the frozen artifacts;
+`run_rebuttal_experiments.py` reproduces them (`PYTHONPATH=. python3 rebuttal/run_rebuttal_experiments.py`,
+~5 min, CPU only), writing JSON to `rebuttal/evidence/`:
+
+| File | Contents |
+|---|---|
+| `e1_hallu_paired_tests.json` | Exact paired t-tests, hallu_NR full coverage, 5 subsets |
+| `e2_threshold_transfer.json` | Threshold-reliability gap per stratum, 5 seeds × 7 subsets |
+| `e3_selective_ndcg_ci.json` | Selective-NDCG bootstrap CIs, nfcorpus + trec-covid |
+| `e4_stratum_audit.json` | Dominance-stratum sizes and fallback triggers, 7 subsets |
+| `e5_scorecard.json` | Win/tie/loss vs Subgroup-Platt/-Isotonic/per-cell HKRR |
+
 ## Caution before posting
 
 The five-subset hallucination table shows the −3.32pp effect is **scifact-specific**; on the other four subsets CalFuse-P vs Linear-Learned is within seed noise (nfcorpus/scidocs/arguana point in the other direction, n.s.). The drafts disclose this proactively — do not remove that disclosure; Reviewer utWJ's Q4 and T3MF's Q2 both probe exactly this, and the data is public in the supplementary.
