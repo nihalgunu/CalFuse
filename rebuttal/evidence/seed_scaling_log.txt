@@ -1,0 +1,3 @@
+Seeds: 2026..2045 (20)
+L1 nfcorpus: best=calfuse_conformal (0.0470); conformal=0.0470 linear=0.0826
+L1 scifact: best=calfuse_conformal (0.0221); conformal=0.0221 linear=0.0240
