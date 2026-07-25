@@ -34,19 +34,25 @@ Three things, one of which your intuition already prices in:
 
 Full transparency, matching Reviewer T3MF's observation: against Subgroup-*Isotonic* the point estimate is close — at 20 seeds IVAP wins on 2 of 7 subsets (trec-covid p=0.005, touche-2020 p<0.0001), ties the other 5, loses none. The revision will state plainly that the bulk of the point-estimate gain comes from stratified *monotone nonparametric* calibration, and that IVAP's main additional contribution is the validity guarantee and the envelope.
 
-## Q4. "Is the 3.32pp hallucination result robust?"
+## Q4. "Is the 3.32pp hallucination result robust? Does it transfer to bigger models?"
 
-Your skepticism is warranted, and we will restructure this section. The released artifacts already contain the same 5-seed protocol on **five** subsets (nfcorpus, scifact, fiqa, arguana, scidocs), not just scifact. Hallucination-among-non-refused at full coverage, 5-seed mean ± sd, CalFuse-P vs Linear-Learned (strongest learned baseline):
+Your skepticism was warranted, and during the discussion period we ran the two experiments the question demands: (a) **doubled every seed** (5→10) on the published Qwen-2.5-7B protocol across all five subsets with verdicts, and (b) reran the three key subsets on **Qwen-2.5-14B-Instruct** (5 seeds). Hallucination-among-non-refused at full coverage, CalFuse-P vs Linear-Learned:
+
+**Qwen-7B, 10 seeds:**
 
 | subset | CalFuse-P | Linear-Learned | paired p |
 |---|---|---|---|
-| scifact | **30.8 ± 3.7** | 34.1 ± 4.4 | **0.045** (d=−1.29) |
-| fiqa | 61.2 ± 3.0 | 62.4 ± 8.6 | 0.75 |
-| nfcorpus | 72.3 ± 5.6 | 70.1 ± 7.2 | 0.29 |
-| scidocs | 50.0 ± 7.5 | 47.7 ± 10.2 | 0.44 |
-| arguana | 75.6 ± 5.2 | 72.4 ± 7.1 | 0.23 |
+| scifact | **30.6 ± 4.3** | 34.1 ± 4.0 | **0.0025** (d=−1.31) |
+| fiqa | 58.6 ± 5.0 | 61.4 ± 8.0 | 0.19 |
+| nfcorpus | 71.3 ± 5.1 | 68.5 ± 5.9 | **0.014** (CalFuse-P *worse*) |
+| scidocs | 54.4 ± 7.8 | 51.7 ± 8.2 | 0.13 |
+| arguana | 77.2 ± 6.1 | 76.0 ± 7.8 | 0.42 |
 
-Only scifact is significant; the other four are within seed noise in both directions (per-method values for every seed are in the released `eval/multiseed/`). The honest claim, which the revision will make, is therefore mechanistic, not universal: *when* the top-k composition is contested (scifact: short claims, dense gold evidence), better subgroup calibration swaps confident distractors out of the context and hallucination drops measurably; where composition is saturated or the generator's failure mode is not retrieval-driven, calibration cannot help and doesn't. We will present all five subsets in the main text, keep scifact as the mechanism case study (rank-of-first-positive distributions are unchanged across methods — the improvement is provably not ranking sharpening), and soften the abstract accordingly. Scaling beyond Qwen-2.5-7B is future work; we will say so rather than imply generality.
+The scifact effect is real and strengthens with power: −3.49 pp at p=0.0025, no longer borderline. Equally honestly: at 10 seeds a significant *deficit* emerges for CalFuse-P on nfcorpus (+2.8 pp, p=0.014); the full CalFuse (with the stratified nonparametric stage) shows no deficit there (68.4 vs 68.5, p=0.96). So the per-subset picture is one robust win, one loss for the parametric base that the full method repairs to parity, and three inconclusive.
+
+**Qwen-14B, 5 seeds (scifact, fiqa, nfcorpus):** every between-method difference collapses (all |Δ| ≤ 0.6 pp, all p>0.69; e.g. scifact CalFuse-P 23.2 vs Linear-Learned 22.8), while overall hallucination drops (scifact ~34%→~23%). The direct answer to "does it transfer to bigger models": **no** — at 14B the generator is robust enough to distractor composition that fusion-method differences vanish end-to-end.
+
+The revision will report all of this and scope the claim accordingly: better subgroup calibration changes *which* distractors enter the context (the mechanism test stands — rank-of-first-positive is unchanged), and this measurably reduces hallucination for a 7B-class generator on contested-composition subsets, with the effect washing out both for stronger generators and for subsets where composition isn't the failure mode. The paper's primary contribution — worst-subgroup calibration, where the 20-seed rescaling strengthens every claim — does not rest on the hallucination experiment; the experiment now demarcates where calibration does and does not reach end-to-end behavior, which we believe is more useful to practitioners than an unscoped claim.
 
 ## Weaknesses 3 & 4 (rare strata; exchangeability)
 

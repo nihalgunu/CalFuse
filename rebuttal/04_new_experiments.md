@@ -110,6 +110,35 @@ output `evidence/l1_seed_scaling_wsece.json`). Everything strengthens:
 - **vs per-cell HKRR (`calfuse_multical`, the F_n instantiation):** 3 wins
   (nfcorpus p<0.0001, fiqa p=0.017, touche p=0.002), 4 ties, 0 losses.
 
+## G1. GPU Phase 1 — hallucination at 10 seeds (Qwen-2.5-7B)
+
+Five new seeds (2031–2035) run on Lambda, verdicts merged into `eval/multiseed/`
+(analysis: `rebuttal/analyze_gpu_results.py`, output `evidence/g1_hallu_10seed.json`).
+CalFuse-P vs Linear-Learned, hallu_NR at full coverage:
+
+| subset | 5-seed result | 10-seed result |
+|---|---|---|
+| scifact | −3.31 pp, p=0.045 | **−3.49 pp, p=0.0025, d=−1.31** |
+| fiqa | −1.20 pp, p=0.75 | −2.80 pp, p=0.19 |
+| nfcorpus | +2.23 pp, p=0.29 | **+2.77 pp, p=0.014 (CalFuse-P worse)** |
+| scidocs | +2.33 pp, p=0.44 | +2.67 pp, p=0.13 |
+| arguana | +3.20 pp, p=0.23 | +1.20 pp, p=0.42 |
+
+The scifact win is real (no longer borderline). The nfcorpus deficit is also
+real — but belongs to the parametric base only: full CalFuse (conformal) ties
+Linear-Learned there (68.4 vs 68.5, p=0.96). Both facts go in the revision.
+
+## G2. GPU Phase 2 — Qwen-2.5-14B model transfer
+
+Original 5 seeds, scifact/fiqa/nfcorpus (`evidence/g2_qwen14b_transfer.json`).
+All fusion-method differences collapse: every CalFuse-vs-Linear-Learned delta
+is ≤0.6 pp with p>0.69, while absolute hallucination falls (scifact ~34%→~23%).
+Conclusion for the rebuttal: the calibration→hallucination pathway is a
+7B-scale phenomenon in this setup; at 14B the generator absorbs distractor
+composition differences. The end-to-end claim is scoped to generator scale and
+subset composition; the calibration claims (which strengthened at 20 seeds) do
+not depend on it.
+
 ## L2. Threshold-transfer at 20 seeds
 
 See `evidence/l2_threshold_transfer_20seed.json` (supersedes the 5-seed E2).
