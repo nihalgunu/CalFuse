@@ -7,7 +7,12 @@
 #   git clone https://github.com/nihalgunu/CalFuse.git && cd CalFuse
 #   git checkout claude/retrieval-calibration-gap-j7oxpe
 #   tmux new -s rebuttal
+#   export HF_TOKEN=<your HuggingFace token>   # optional: avoids HF rate limits
 #   bash rebuttal/lambda_gpu_run.sh all      # or: phase1 | phase2
+#
+# Note: orchestrating this from the Claude Code sandbox was attempted and is
+# blocked by the session's egress network policy (cloud.lambdalabs.com -> 403),
+# so this script is the supported path. Never commit tokens to the repo.
 #
 # Results are committed to branch rebuttal-gpu-results and pushed (uses
 # whatever git credentials the instance has; set GIT_PUSH=0 to skip and
