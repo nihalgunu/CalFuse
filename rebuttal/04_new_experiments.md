@@ -139,6 +139,24 @@ composition differences. The end-to-end claim is scoped to generator scale and
 subset composition; the calibration claims (which strengthened at 20 seeds) do
 not depend on it.
 
-## L2. Threshold-transfer at 20 seeds
+## L2. Threshold-transfer at 20 seeds (authoritative; supersedes E2's stats)
 
-See `evidence/l2_threshold_transfer_20seed.json` (supersedes the 5-seed E2).
+Rerun of E2 at 20 reseeded splits with per-subset process isolation
+(`evidence/l2_threshold_transfer_20seed.json`; per-subset files
+`l2_e2_20seed_*.json`). Paired CalFuse-vs-Linear-Learned on worst-stratum gap:
+
+| subset (τ) | Linear-Learned | CalFuse | paired p |
+|---|---|---|---|
+| nfcorpus (0.7) | 0.075 | **0.036** | **<0.0001** (d=−1.17) |
+| scidocs (0.5) | 0.170 | **0.067** | **<0.0001** (d=−1.58) |
+| fiqa (0.7) | 0.107 | 0.077 | 0.095 (trend) |
+| trec-covid (0.5/0.7) | 0.081/0.089 | 0.072/0.100 | 0.16 / 0.11 (ties) |
+| others | — | — | n.s. |
+
+RRF on nfcorpus: worst-stratum gap 0.61 at τ=0.7, cross-strata realized-precision
+spread up to **0.80**.
+
+Honest scaling note: two 5-seed significances did **not** survive 20 seeds
+(nfcorpus τ=0.5: p=0.036→0.89; fiqa τ=0.7: p=0.044→0.095) — which is exactly
+why we scaled seeds before quoting them. The surviving effects are decisive
+(p<0.0001, |d|>1.1). Drafts quote only the 20-seed numbers.

@@ -1,2 +1,16 @@
 E2 nfcorpus: done
 L2-20 nfcorpus: exit 0
+E2 scifact: done
+L2-20 scifact: exit 0
+E2 fiqa: done
+L2-20 fiqa: exit 0
+E2 arguana: done
+L2-20 arguana: exit 0
+E2 scidocs: done
+L2-20 scidocs: exit 0
+E2 trec-covid: done
+L2-20 trec-covid: exit 0
+E2 touche-2020: done
+L2-20 touche-2020: exit 0
+merged subsets: ['arguana', 'fiqa', 'nfcorpus', 'scidocs', 'scifact', 'touche-2020', 'trec-covid']
+L2 ALL DONE

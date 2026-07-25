@@ -8,10 +8,10 @@ You don't, if your system always generates from the top-k. Calibration buys noth
 
 The paper's setting is the *thresholded* system: above τ, retrieved passages ground generation; below τ, the system abstains or falls back. A monotone score supports ranking but gives τ no semantics — τ=0.7 on an uncalibrated score is a dial you tune per corpus by trial and error, and its meaning silently changes across query subpopulations.
 
-We ran a new experiment during the discussion period to make this concrete (all from the released frozen score matrices; 5 reseeded splits × 7 subsets). Fix τ and measure, in each dominance stratum with ≥20 pairs above τ, the **threshold-reliability gap** |realized precision − mean stated probability| — the quantity a deployment implicitly trusts when it sets "ground if p ≥ τ":
+We ran a new experiment during the discussion period to make this concrete (from the released frozen score matrices; 20 reseeded splits × 7 subsets). Fix τ and measure, in each dominance stratum with ≥20 pairs above τ, the **threshold-reliability gap** |realized precision − mean stated probability| — the quantity a deployment implicitly trusts when it sets "ground if p ≥ τ":
 
-- On nfcorpus at τ=0.7, RRF's realized precision differs by up to **0.78 across strata** at the same threshold — τ literally does not mean the same thing for different query types. Its worst-stratum gap is 0.58.
-- Worst-stratum gap, Linear-Learned vs CalFuse: nfcorpus 0.097 → **0.036** (paired p<0.001), scidocs (τ=0.5) 0.151 → **0.046** (p=0.010), fiqa (τ=0.7) 0.103 → **0.062** (p=0.044); significantly smaller on 4 of 7 subsets, tied on the rest, never significantly larger.
+- On nfcorpus at τ=0.7, RRF's realized precision differs by up to **0.80 across strata** at the same threshold — τ literally does not mean the same thing for different query types. Its worst-stratum gap is 0.61.
+- Worst-stratum gap, Linear-Learned vs CalFuse: nfcorpus (τ=0.7) 0.075 → **0.036** (paired p<0.0001, d=−1.2), scidocs (τ=0.5) 0.170 → **0.067** (p<0.0001, d=−1.6), fiqa (τ=0.7) 0.107 → 0.077 (trend, p=0.095); statistically tied on the remaining subsets, never significantly larger.
 
 The selective curves (Fig. 4) and the hallucination experiment are the downstream cash value: on scifact, abstaining on the bottom half of CalFuse-P's calibrated scores cuts hallucination-among-answered from 30.8% to 15.2% (5-seed means), a trade a raw reranker score does not expose with known semantics. We will open Section 1 with this "when you need this / when you don't" framing and add the threshold-reliability experiment.
 
