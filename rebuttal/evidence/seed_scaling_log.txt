@@ -1,3 +1,15 @@
 Seeds: 2026..2045 (20)
 L1 nfcorpus: best=calfuse_conformal (0.0470); conformal=0.0470 linear=0.0826
 L1 scifact: best=calfuse_conformal (0.0221); conformal=0.0221 linear=0.0240
+L1 fiqa: best=calfuse_conformal (0.0226); conformal=0.0226 linear=0.0398
+L1 arguana: best=calfuse_parametric_subgroup_isotonic (0.0123); conformal=0.0125 linear=0.0129
+L1 scidocs: best=calfuse_conformal (0.0215); conformal=0.0215 linear=0.0267
+L1 trec-covid: best=calfuse_conformal (0.0705); conformal=0.0705 linear=0.0711
+L1 touche-2020: best=calfuse_conformal (0.0935); conformal=0.0935 linear=0.1037
+
+L2: threshold transfer at 20 seeds
+E2 nfcorpus: done
+E2 scifact: done
+E2 fiqa: done
+E2 arguana: done
+E2 scidocs: done

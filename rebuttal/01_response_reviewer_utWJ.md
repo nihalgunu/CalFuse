@@ -28,11 +28,11 @@ We will add both points, with the equation for the assignment, to Section 3.
 
 Three things, one of which your intuition already prices in:
 
-- **No parametric shape assumption.** Subgroup-Platt fits a 2-parameter sigmoid per stratum; when the per-stratum reliability curve isn't sigmoid, it can't fix it. This is visible in the data: on fiqa, Subgroup-Platt vs per-stratum IVAP on worst-subgroup ECE-15 differs by +0.019 (paired t over 5 seeds, p<0.001, d=3.9); scifact p=0.043, d=1.3; on subsets where the curve happens to be near-sigmoid (nfcorpus) the two tie (p=0.21). So Subgroup-Platt is a good baseline that fails exactly when the miscalibration is shape-wise nontrivial.
+- **No parametric shape assumption.** Subgroup-Platt fits a 2-parameter sigmoid per stratum; when the per-stratum reliability curve isn't sigmoid, it can't fix it. We rescaled this comparison to 20 reseeded splits during the discussion period (4× the paper's protocol, from the frozen matrices): per-stratum IVAP beats Subgroup-Platt on worst-subgroup ECE-15 on 4 of 7 subsets (fiqa and arguana p<0.0001, scifact p=0.0004, nfcorpus p=0.0008), ties the other 3, loses none. Subgroup-Platt is a good baseline that fails exactly when the miscalibration is shape-wise nontrivial.
 - **Finite-sample validity.** Per-stratum IVAP carries a distribution-free calibration guarantee under exchangeability; Platt carries none.
 - **The envelope.** IVAP returns `[p_lo, p_hi]`, giving a per-prediction uncertainty width usable for abstention and monitoring; Platt gives a point.
 
-Full transparency, matching Reviewer T3MF's observation: against Subgroup-*Isotonic* the point estimate is statistically tied on six of seven subsets (one significant win, touche-2020, p=0.030). The revision will state plainly that the point-estimate gain comes from stratified *monotone nonparametric* calibration, and that IVAP's marginal contribution over isotonic is the guarantee and the envelope, not additional ECE.
+Full transparency, matching Reviewer T3MF's observation: against Subgroup-*Isotonic* the point estimate is close — at 20 seeds IVAP wins on 2 of 7 subsets (trec-covid p=0.005, touche-2020 p<0.0001), ties the other 5, loses none. The revision will state plainly that the bulk of the point-estimate gain comes from stratified *monotone nonparametric* calibration, and that IVAP's main additional contribution is the validity guarantee and the envelope.
 
 ## Q4. "Is the 3.32pp hallucination result robust?"
 

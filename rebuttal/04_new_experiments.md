@@ -88,3 +88,28 @@ The third row is new ammunition for the theory questions (T3MF Q1, VkVU Q1):
 `calfuse_multical` is the empirical instantiation of the per-cell class F_n that
 Theorem 1 proves is worst-cell sample-starved — and it indeed loses to CalFuse on
 3 subsets and never wins. The lower bound's prediction is visible in the data.
+
+## L1. Seed-scaling: the core claims at 20 seeds (4× the paper's protocol)
+
+Rerun of worst-subgroup ECE-15 for the full method family on all seven subsets
+with 20 reseeded splits (2026–2045; runner `rebuttal/run_seed_scaling.py`,
+output `evidence/l1_seed_scaling_wsece.json`). Everything strengthens:
+
+- **Headline:** CalFuse has the lowest mean worst-subgroup ECE-15 on 6 of 7
+  subsets; on arguana it is statistically tied for best with Subgroup-Isotonic
+  (Δ=+0.0003, p=0.27). Never beaten by a non-CalFuse-family method anywhere.
+- **vs Linear-Learned:** significant on nfcorpus (Δ=−0.036, p<0.0001, d=−3.1),
+  fiqa (Δ=−0.017, p<0.0001, d=−2.4), scidocs (p=0.002); touche p=0.051 and
+  scifact p=0.076 trend; arguana/trec-covid ties. 0 losses.
+- **vs Subgroup-Platt:** now 4 significant wins (nfcorpus p=0.0008, scifact
+  p=0.0004, fiqa p<0.0001, arguana p<0.0001), 3 ties, 0 losses.
+- **vs Subgroup-Isotonic:** 2 significant wins (trec-covid p=0.005,
+  touche-2020 p<0.0001), 5 ties, 0 losses — at n=20 the IVAP point estimate
+  is no longer strictly redundant with isotonic, though the honest summary
+  remains "mostly tied".
+- **vs per-cell HKRR (`calfuse_multical`, the F_n instantiation):** 3 wins
+  (nfcorpus p<0.0001, fiqa p=0.017, touche p=0.002), 4 ties, 0 losses.
+
+## L2. Threshold-transfer at 20 seeds
+
+See `evidence/l2_threshold_transfer_20seed.json` (supersedes the 5-seed E2).

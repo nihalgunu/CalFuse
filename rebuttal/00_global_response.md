@@ -24,6 +24,8 @@ All three reviews raise, in different forms, how Theorem 1 relates to CalFuse. W
 
 All computed from the released frozen score matrices and cached verdicts (no retriever or LLM re-runs), and reproducible from the supplementary:
 
+- **Seed-scaling of the core claims to 20 reseeded splits** (4× the submitted protocol). The headline survives and sharpens: CalFuse has the lowest worst-subgroup ECE-15 on 6 of 7 subsets and is statistically tied for lowest on the seventh; vs the strongest learned baseline, three wins at p≤0.002, four ties, no losses.
+
 - **Threshold-reliability experiment (new).** At fixed τ, the worst-stratum gap between realized precision and stated probability: CalFuse is significantly smaller than Linear-Learned on 4 of 7 subsets (e.g. nfcorpus 0.097→0.036, paired p<0.001), never significantly larger; RRF's realized precision at the same τ varies by up to 0.78 across strata. This operationalizes why marginal calibration is not enough — see reply to Reviewer utWJ (Q1).
 - The full **five-subset × five-seed LLM hallucination table** with exact paired p-values and honest discussion of where the effect does and does not appear — see replies to Reviewer utWJ (Q4) and Reviewer T3MF (Q2).
 - **Empirical confirmation of Theorem 1's prediction:** the HKRR-style per-cell baseline (an instantiation of the lower-bounded class F_n) loses to CalFuse on 3 of 7 subsets and never wins — see replies to Reviewers T3MF and VkVU.
