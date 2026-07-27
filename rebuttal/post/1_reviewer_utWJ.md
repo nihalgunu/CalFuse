@@ -1,4 +1,4 @@
-Thank you for a review that asks exactly the questions a practitioner would.
+Thank you for asking exactly the questions a practitioner would.
 
 **Q1. "My reranker ranks fine without probabilities — why do I care?"**
 
@@ -13,7 +13,7 @@ On scifact, abstaining on the bottom half of calibrated scores cuts hallucinatio
 
 **Q2. Subgroup assignment — circular?**
 
-No: assignment is a fixed, label-free function of the *input* signal vector, not of the score being calibrated — standardize each signal column, assign the pair to the stratum of the arg-max standardized input signal. Circularity would require membership to depend on the calibrated fused output; here the partition is frozen before the final calibration stage, identical at calibration/test time, and the output never feeds back. This is the standard multicalibration setting (HKRR 2018): subgroups may be arbitrary computable functions of the covariates, including features the predictor uses. We chose dominance strata because they are (a) label-free at inference, (b) where fusion weights matter most, (c) empirically where the failures live (Fig. 1). The framework accepts any partition; dominance is the instantiation. Both points and the assignment equation go into Section 3.
+No: assignment is a fixed, label-free function of the *input* signal vector — standardize each signal column, assign the pair to the stratum of the arg-max standardized input signal. Circularity would require membership to depend on the calibrated fused output; here the partition is frozen before the final calibration stage, identical at calibration/test time, and the output never feeds back. This is the standard multicalibration setting (HKRR 2018): subgroups may be arbitrary computable functions of the covariates, including features the predictor uses. We chose dominance strata because they are (a) label-free at inference, (b) where fusion weights matter most, (c) empirically where the failures live (Fig. 1). The framework accepts any partition; dominance is the instantiation. Both points and the assignment equation go into Section 3.
 
 **Q3. What does Venn–Abers add over Subgroup-Platt?**
 
@@ -21,11 +21,11 @@ No: assignment is a fixed, label-free function of the *input* signal vector, not
 - *Finite-sample validity* under exchangeability; Platt has none.
 - *The envelope* [p_lo, p_hi] for abstention and monitoring; Platt gives a point.
 
-Transparency, matching Reviewer T3MF: against Subgroup-*Isotonic*, IVAP wins on 2 of 7 (trec-covid p=0.005, touche p<0.0001), ties 5, loses none. The revision states that the bulk of the point-estimate gain comes from stratified monotone nonparametric calibration; IVAP's main addition is the guarantee and envelope.
+Transparency, matching Reviewer T3MF: against Subgroup-*Isotonic*, IVAP wins on 2 of 7 (trec-covid p=0.005, touche p<0.0001), ties 5, loses none. The bulk of the point-estimate gain comes from stratified monotone calibration; IVAP's addition is the guarantee and envelope.
 
 **Q4. Is −3.32pp robust? Does it transfer to bigger models?**
 
-We ran both experiments your question demands: (a) doubled to **10 seeds** on the published Qwen-7B protocol, all five subsets; (b) reran three subsets on **Qwen-2.5-14B**. Hallu-among-non-refused, CalFuse-P vs Linear-Learned (7B, 10 seeds):
+We ran both experiments the question demands: (a) **10 seeds** (doubled) on the published Qwen-7B protocol, all five subsets; (b) three subsets on **Qwen-2.5-14B**. Hallucination-among-non-refused, CalFuse-P vs Linear-Learned (7B, 10 seeds):
 
 | subset | CalFuse-P | Linear-L | p |
 |---|---|---|---|
@@ -35,7 +35,7 @@ We ran both experiments your question demands: (a) doubled to **10 seeds** on th
 | scidocs | 54.4±7.8 | 51.7±8.2 | 0.13 |
 | arguana | 77.2±6.1 | 76.0±7.8 | 0.42 |
 
-scifact strengthens with power — no longer borderline. Equally honestly: a significant deficit emerges for CalFuse-P on nfcorpus, which the full CalFuse repairs to parity (68.4 vs 68.5, p=0.96). At **14B**, every between-method difference collapses (|Δ|≤0.6pp, p>0.69) while overall hallucination drops (~34%→~23% on scifact). Direct answer: **no, it does not transfer** — the effect is a 7B-scale phenomenon on contested-composition subsets. The revision reports all of this and scopes the claim; the paper's primary contribution (worst-subgroup calibration, which strengthened at 20 seeds) does not rest on it.
+scifact strengthens with power — no longer borderline. Equally honestly: a significant deficit emerges for CalFuse-P on nfcorpus, which the full CalFuse repairs to parity (68.4 vs 68.5, p=0.96). At **14B**, every between-method difference collapses (|Δ|≤0.6pp, p>0.69) while overall hallucination drops (~34%→~23% on scifact). Direct answer: **no, it does not transfer** — the effect is a 7B-scale phenomenon on contested-composition subsets. The revision reports and scopes all of this; the primary contribution — worst-subgroup calibration, strengthened at 20 seeds — does not rest on it.
 
 **Weaknesses 3–4.** *Rare strata:* strata below 30 pairs (or a positive floor) fall back to pooled IVAP — never worse than marginal; a new audit shows strata of 245–6,686 pairs across all subsets (fallback never fires); with 10% calibration data, worst-subgroup ECE is 0.023 vs ~0.021 full. *Exchangeability:* agreed — per-domain guarantee; we quantify cross-domain breakage (KS up to 0.998; transferred ECE ~5–7×) and ship an anytime-valid e-process drift monitor; recalibration needs only a fresh labeled calibration split. Promoted to Limitations.
 
