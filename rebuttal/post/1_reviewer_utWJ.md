@@ -2,14 +2,14 @@ Thank you for a review that asks exactly the questions a practitioner would.
 
 **Q1. "My reranker ranks fine without probabilities — why do I care?"**
 
-You don't, if your system always generates from the top-k: full-coverage NDCG@10 is statistically indistinguishable between CalFuse and Linear-Learned on every subset (e.g. nfcorpus Δ=0.0005, p=0.91). The paper's setting is the *thresholded* system: above τ, retrieved passages ground generation; below τ, the system abstains. A monotone score supports ranking but gives τ no semantics, and its meaning silently changes across query subpopulations.
+You don't, if your system always generates from the top-k: full-coverage NDCG@10 is statistically indistinguishable between CalFuse and Linear-Learned on every subset (e.g. nfcorpus Δ=0.0005, p=0.91). The paper's setting is the *thresholded* system — above τ, retrieved passages ground generation; below τ, the system abstains — where a monotone score gives τ no semantics, and its meaning silently changes across query subpopulations.
 
-We ran a new experiment during the discussion period to make this concrete (20 reseeded splits × 7 subsets, from the frozen score matrices). Fix τ; in each dominance stratum with ≥20 pairs above τ, measure the **threshold-reliability gap** |realized precision − mean stated probability| — the quantity a deployment trusts when it sets "ground if p ≥ τ":
+New discussion-period experiment (20 reseeded splits × 7 subsets, from the frozen score matrices): fix τ; in each dominance stratum with ≥20 pairs above τ, measure the **threshold-reliability gap** |realized precision − mean stated probability| — the quantity a deployment trusts when it sets "ground if p ≥ τ":
 
 - On nfcorpus at τ=0.7, RRF's realized precision differs by up to **0.80 across strata** at the same threshold; its worst-stratum gap is 0.61.
 - Worst-stratum gap, Linear-Learned vs CalFuse: nfcorpus (τ=0.7) 0.075 → **0.036** (paired p<0.0001, d=−1.2); scidocs (τ=0.5) 0.170 → **0.067** (p<0.0001, d=−1.6); fiqa trend (p=0.095); tied elsewhere, never significantly larger.
 
-Downstream, on scifact, abstaining on the bottom half of CalFuse-P's calibrated scores cuts hallucination-among-answered from 30.8% to 15.2%. We will open Section 1 with this framing and add the experiment.
+On scifact, abstaining on the bottom half of calibrated scores cuts hallucination-among-answered from 30.8% to 15.2%. Section 1 will open with this framing, plus the new experiment.
 
 **Q2. Subgroup assignment — circular?**
 
